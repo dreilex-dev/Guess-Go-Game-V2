@@ -12,13 +12,14 @@ module.exports = {
           darker: "#0D3E45",
       },
       white: "#FFFFFF",
+      black: "#000000",
     },
     fontSize: {
       'base': "25px",
       'sm': "21px",
-      'lg': "30px",
-      'xl': "40px",
-      '2xl': "48px",
+      'lg': "24px",
+      'xl': "30px",
+      '2xl': "40px",
     },
     screens: {
       lg: '1280px',
