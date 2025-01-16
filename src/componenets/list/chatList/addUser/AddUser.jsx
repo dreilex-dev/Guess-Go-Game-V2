@@ -154,6 +154,11 @@ const AddUser = () => {
           })
         );
 
+        if (currentUserId === currentUser.id) {
+          setCurrentUser({ ...currentUser, is_playing: assignedId });
+          useUserStore.getState().fetchPlayingUserInfo(assignedId);
+        }
+
         updatedUsers.push({
           ...users[i],
           is_playing: assignedId,

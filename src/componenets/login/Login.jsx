@@ -110,6 +110,7 @@ const Login = () => {
         ) {
           toast.error("The game has already started. You cannot join now.");
           setLoadingJoin(false);
+          window.location.reload();
           return;
         }
 
@@ -127,6 +128,12 @@ const Login = () => {
 
         toast.success("Welcome back! You have joined the game.");
       } else {
+        if (gameLobbyData.gameState === "ready") {
+          toast.error("The game has already started. You cannot join now.");
+          setLoadingJoin(false);
+          return;
+        }
+
         if (
           gameLobbyData.participants &&
           gameLobbyData.participants.length >= 6
@@ -135,6 +142,7 @@ const Login = () => {
           setLoadingJoin(false);
           return;
         }
+
         userId = nanoid();
 
         const hintRef1 = doc(collection(db, "hints"));
