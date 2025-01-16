@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
@@ -7,7 +11,8 @@
 }
 
 body {
-  background-image: url("/background/88.png");
+  /* background-image: url("/background/88.png"); */
+  background-color: #209AAB;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

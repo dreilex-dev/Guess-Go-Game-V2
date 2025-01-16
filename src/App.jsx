@@ -11,6 +11,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "./lib/firebase";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import GameLobby from "./componenets/GameLobby";
+import HomePage from "./componenets/homePage/HomePage";
 
 const App = () => {
   const {
@@ -52,8 +53,8 @@ const App = () => {
   if (isLoading) return <div className="loading">Loading..</div>;
   return (
     <Router>
-      <div className="container">
-        <Routes>
+      <div> {/* className="container" */}
+        {/* <Routes>
           {!currentUser && <Route path="*" element={<Login />} />}
           {currentUser && gameState !== "ready" && (
             <Route path="*" element={<AddUser />} />
@@ -78,7 +79,8 @@ const App = () => {
             </>
           )}
         </Routes>
-        <Notification />
+        <Notification /> */}
+        <HomePage />
       </div>
     </Router>
   );
