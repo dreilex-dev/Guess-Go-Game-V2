@@ -12,7 +12,16 @@ module.exports = {
           darker: "#0D3E45",
       },
       white: "#FFFFFF",
-      
+    },
+    fontSize: {
+      'base': "25px",
+      'sm': "21px",
+      'lg': "30px",
+      'xl': "40px",
+      '2xl': "48px",
+    },
+    screens: {
+      lg: '1280px',
     },
   },
   plugins: [],
