@@ -198,7 +198,7 @@ const ChatList = () => {
 
                     const usersInChat = [user, ...(item.users || [])];
                     for (const chatUser of usersInChat) {
-                      if (chatUser.is_playing) {
+                      if (chatUser.is_playing !== "") {
                         const opponentRef = doc(
                           db,
                           "users",
@@ -274,7 +274,7 @@ const ChatList = () => {
               ) {
                 const updatedChat = { ...chat };
 
-                if (userData.is_playing) {
+                if (userData.is_playing !== "") {
                   updatedChat.is_playing_as_avatar = userData.avatar;
                   updatedChat.is_playing_as_username = userData.username;
                 } else {
@@ -369,39 +369,44 @@ const ChatList = () => {
       const users = [];
       isPlayingSnapshot.forEach((doc) => {
         const userData = doc.data();
+        if (userData.is_playing !== "") {
+          console.log(
+            "Useeeeeeeeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+            userData.is_playing
+          );
+          let matchedChat = null;
 
-        let matchedChat = null;
+          chats.forEach((chat) => {
+            if (
+              chat.id.includes(currentUser.id) &&
+              chat.id.includes(userData.id)
+            ) {
+              console.log(
+                "Found matching chat:",
+                chat.id,
+                currentUser.id,
+                userData.id
+              );
+              matchedChat = chat;
+            }
+          });
 
-        chats.forEach((chat) => {
-          if (
-            chat.id.includes(currentUser.id) &&
-            chat.id.includes(userData.id)
-          ) {
-            console.log(
-              "Found matching chat:",
-              chat.id,
-              currentUser.id,
-              userData.id
-            );
-            matchedChat = chat;
+          if (matchedChat) {
+            const chatData = {
+              id: matchedChat.id,
+              lastMessage: matchedChat.lastMessage,
+              receiverId: userData.id,
+              senderId: currentUser.id,
+              updatedAt: Date.now(),
+              is_playing_as_username: fackIdentity.username,
+              is_playing_as_avatar: fackIdentity.avatar,
+              user: userData,
+            };
+
+            users.push(chatData);
+          } else {
+            console.log("No matching chat found.");
           }
-        });
-
-        if (matchedChat) {
-          const chatData = {
-            id: matchedChat.id,
-            lastMessage: matchedChat.lastMessage,
-            receiverId: userData.id,
-            senderId: currentUser.id,
-            updatedAt: Date.now(),
-            is_playing_as_username: fackIdentity.username,
-            is_playing_as_avatar: fackIdentity.avatar,
-            user: userData,
-          };
-
-          users.push(chatData);
-        } else {
-          console.log("No matching chat found.");
         }
       });
 
@@ -432,6 +437,8 @@ const ChatList = () => {
       setFilteredChats([]);
     }
   }, [searchTerm]);
+
+  console.log(filteredChats);
 
   return (
     <>

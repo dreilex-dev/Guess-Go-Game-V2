@@ -54,29 +54,33 @@ const App = () => {
     <Router>
       <div className="container">
         <Routes>
-          {!currentUser && <Route path="*" element={<Login />} />}
+          {(!currentUser || currentUser.is_playing === "") && (
+            <Route path="*" element={<Login />} />
+          )}
           {currentUser && gameState !== "ready" && (
             <Route path="*" element={<AddUser />} />
           )}
-          {currentUser && gameState === "ready" && (
-            <>
-              <Route path="/" element={<GameLobby />} />{" "}
-              <Route
-                path="/chat_room"
-                element={
-                  <>
-                    <List />
-                    {chatId && (
-                      <>
-                        <Chat />
-                        <Details />
-                      </>
-                    )}
-                  </>
-                }
-              />
-            </>
-          )}
+          {currentUser &&
+            gameState === "ready" &&
+            currentUser.is_playing !== "" && (
+              <>
+                <Route path="/" element={<GameLobby />} />{" "}
+                <Route
+                  path="/chat_room"
+                  element={
+                    <>
+                      <List />
+                      {chatId && (
+                        <>
+                          <Chat />
+                          <Details />
+                        </>
+                      )}
+                    </>
+                  }
+                />
+              </>
+            )}
         </Routes>
         <Notification />
       </div>
