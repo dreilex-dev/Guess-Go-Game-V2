@@ -11,7 +11,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 2px;
+    gap: 5px;
     overflow-y: auto;
 
     &::-webkit-scrollbar {
@@ -186,9 +186,45 @@
         background-color: #167d8b;
       }
     }
+
+    .logOutBtn {
+      background-color: #f8ffe5;
+      color: rgb(90, 89, 89);
+
+      &:hover {
+        color: rgb(90, 89, 89);
+        background-color: #f4f9e5;
+      }
+    }
   }
 
   .hidden {
     display: none;
+  }
+
+  .hint_btn {
+    padding: 0.5rem 1rem;
+    width: 200px;
+    height: 38px;
+    background-color: #f8ffe5; /* Blue-500 */
+    color: rgb(90, 89, 89);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease;
+  }
+
+  .hint_btn:hover {
+    background-color: #37a1af;
+    color: white;
+  }
+
+  .hint_btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #37a1af;
+  }
+
+  .hint_btn:active {
+    transform: scale(0.95);
   }
 }

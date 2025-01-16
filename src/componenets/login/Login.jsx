@@ -136,12 +136,31 @@ const Login = () => {
           return;
         }
         userId = nanoid();
+
+        const hintRef1 = doc(collection(db, "hints"));
+        const hintRef2 = doc(collection(db, "hints"));
+
+        await setDoc(hintRef1, {
+          hint: hint_no1_join,
+          isSeenBy: [],
+          createdAt: new Date(),
+        });
+
+        await setDoc(hintRef2, {
+          hint: hint_no2_join,
+          isSeenBy: [],
+          createdAt: new Date(),
+        });
+
+        const hintId1 = hintRef1.id;
+        const hintId2 = hintRef2.id;
+
         useUserStore.getState().setCurrentUser({
           id: userId,
           username: username_join,
           game_code,
-          hint_no1: hint_no1_join,
-          hint_no2: hint_no2_join,
+          hint_no1: hintId1,
+          hint_no2: hintId2,
           avatar: avatarJoin,
           no_of_hints: 3,
           points: 0,
@@ -163,8 +182,8 @@ const Login = () => {
             id: userId,
             username: username_join,
             game_code,
-            hint_no1: hint_no1_join,
-            hint_no2: hint_no2_join,
+            hint_no1: hintId1,
+            hint_no2: hintId2,
             avatar: avatarJoin,
             no_of_hints: 3,
             points: 0,
@@ -210,15 +229,32 @@ const Login = () => {
 
     try {
       const userId = nanoid();
-
       const gameCode = nanoid(6);
+
+      const hintRef1 = doc(collection(db, "hints"));
+      const hintRef2 = doc(collection(db, "hints"));
+
+      await setDoc(hintRef1, {
+        hint: hint_no1_create,
+        isSeenBy: [],
+        createdAt: new Date(),
+      });
+
+      await setDoc(hintRef2, {
+        hint: hint_no2_create,
+        isSeenBy: [],
+        createdAt: new Date(),
+      });
+
+      const hintId1 = hintRef1.id;
+      const hintId2 = hintRef2.id;
 
       await useUserStore.getState().setCurrentUser({
         id: userId,
         username: username_create,
         game_code: gameCode,
-        hint_no1: hint_no1_create,
-        hint_no2: hint_no2_create,
+        hint_no1: hintId1,
+        hint_no2: hintId2,
         avatar: avatarCreate,
         no_of_hints: 3,
         points: 0,
@@ -231,8 +267,8 @@ const Login = () => {
           id: userId,
           username: username_create,
           game_code: gameCode,
-          hint_no1: hint_no1_create,
-          hint_no2: hint_no2_create,
+          hint_no1: hintId1,
+          hint_no2: hintId2,
           avatar: avatarCreate,
           no_of_hints: 3,
           points: 0,
