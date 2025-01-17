@@ -92,8 +92,8 @@ const AddUser = () => {
 
   const handlePlayersReady = async () => {
     try {
-      if (users.length <= 2) {
-        toast.error("Not enough players to start the game.");
+      if (users.length <= 3) {
+        toast.error("Not enough players to start the game (minimum 4).");
         console.log("Not enough players to set the game to ready.");
         return;
       }
@@ -111,8 +111,8 @@ const AddUser = () => {
   };
 
   const assignRandomIsPlaying = async () => {
-    if (users.length < 2) {
-      toast.error("Not enough players.");
+    if (users.length <= 3) {
+      toast.error("Not enough players to start the game (minimum 4)");
       console.log("Not enough players to assign is_playing.");
       return;
     }
@@ -153,6 +153,11 @@ const AddUser = () => {
             no_of_hints: hintsValue,
           })
         );
+
+        if (currentUserId === currentUser.id) {
+          setCurrentUser({ ...currentUser, is_playing: assignedId });
+          useUserStore.getState().fetchPlayingUserInfo(assignedId);
+        }
 
         updatedUsers.push({
           ...users[i],

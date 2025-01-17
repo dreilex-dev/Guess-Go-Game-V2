@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { db } from "./firebase";
 import { toast } from "react-toastify";
 
-export const useUserStore = create((set) => ({
+export const useUserStore = create((set, get) => ({
   currentUser: null,
   isLoading: true,
   playingUser: null,
@@ -32,60 +32,108 @@ export const useUserStore = create((set) => ({
     }
   },
 
-  incrementPoints: async (uid) => {
+  /*incrementPoints: async () => {
     try {
-      const docRef = doc(db, "users", uid);
-      const docSnap = await getDoc(docRef);
+      const state = get();
+      const currentUser = state.currentUser;
 
-      if (docSnap.exists()) {
-        const currentPoints = docSnap.data().points || 0;
-        const updatedPoints = currentPoints + 1;
-
-        await updateDoc(docRef, { points: updatedPoints });
-        set((state) => ({
-          currentUser: { ...state.currentUser, points: updatedPoints },
-        }));
+      if (!currentUser) {
+        console.log("No current user is found!");
+        return;
       }
+      const docRef = doc(db, "users", currentUser.id);
+      await updateDoc(docRef, {
+        points: (currentUser.points || 0) + 1,
+      });
+
+      set((prevState) => ({
+        ...prevState,
+        currentUser: {
+          ...currentUser,
+          points: (currentUser.points || 0) + 1,
+        },
+      }));
     } catch (err) {
       console.error("Error incrementing points:", err);
+    }
+  },*/
+
+  addGuess: async (userId, guessedUsername) => {
+    try {
+      const state = get();
+      const currentUser = state.currentUser;
+
+      if (!currentUser) {
+        console.error("No current user found!");
+        return;
+      }
+
+      if (!currentUser.guessedUsers) {
+        currentUser.guessedUsers = [];
+      }
+
+      if (currentUser.guessedUsers.includes(userId)) {
+        toast.error("You have already guessed for this user!");
+        return;
+      }
+
+      const isCorrectGuess =
+        guessedUsername.trim().toLowerCase() ===
+        state.playingUser?.username.toLowerCase();
+
+      const docRef = doc(db, "users", currentUser.id);
+      await updateDoc(docRef, {
+        guessedUsers: [...currentUser.guessedUsers, userId],
+        ...(isCorrectGuess && { points: (currentUser.points || 0) + 1 }),
+      });
+
+      set({
+        currentUser: {
+          ...currentUser,
+          guessedUsers: [...currentUser.guessedUsers, userId],
+          points: isCorrectGuess
+            ? (currentUser.points || 0) + 1
+            : currentUser.points,
+        },
+      });
+    } catch (error) {
+      console.error("Error handling guess:", error);
+      toast.error("Something went wrong. Please try again.");
     }
   },
 
   decrementHints: async () => {
     try {
-      set((state) => {
-        const currentUser = state.currentUser;
+      const state = get();
+      const currentUser = state.currentUser;
 
-        if (!currentUser) {
-          toast.error("No current user found.");
-          return state;
-        }
+      if (!currentUser) {
+        console.log("No current user found.");
+        return;
+      }
 
-        const currentHints = currentUser.no_of_hints || 0;
+      const docRef = doc(db, "users", currentUser.id);
 
-        if (currentHints > 0) {
-          const updatedHints = currentHints - 1;
+      if ((currentUser.no_of_hints || 0) > 0) {
+        await updateDoc(docRef, {
+          no_of_hints: (currentUser.no_of_hints || 0) - 1,
+        });
 
-          const docRef = doc(db, "users", currentUser.id);
-          updateDoc(docRef, { no_of_hints: updatedHints })
-            .then(() => {
-              console.log("Hint used successfully!");
-            })
-            .catch((error) => {
-              console.error("Error updating hints in Firebase:", error);
-            });
+        set((prevState) => ({
+          ...prevState,
+          currentUser: {
+            ...currentUser,
+            no_of_hints: (currentUser.no_of_hints || 0) - 1,
+          },
+        }));
 
-          return {
-            ...state,
-            currentUser: { ...currentUser, no_of_hints: updatedHints },
-          };
-        } else {
-          toast.error("No more hints available.");
-          return state;
-        }
-      });
-    } catch (err) {
-      console.error("Error decrementing hints:", err);
+        console.log("Hint used successfully!");
+      } else {
+        console.log("No more hints available.");
+      }
+    } catch (error) {
+      console.error("Error decrementing hints:", error);
+      console.log("Failed to use hint. Please try again.");
     }
   },
 
