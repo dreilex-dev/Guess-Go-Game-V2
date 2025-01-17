@@ -2,11 +2,14 @@ import React from "react";
 import { toast } from "react-toastify";
 import { auth } from "../lib/firebase";
 import { signOut } from "firebase/auth";
+import { useUserStore } from "../lib/userStore";
 
 const LogOutButton = () => {
-  const handleLogout = async () => {
+  const { resetUser } = useUserStore();
+
+  const handleLogout = () => {
     try {
-      await signOut(auth);
+      resetUser();
       toast.success("Logged out successfully");
     } catch (error) {
       console.error("Error logging out:", error);
