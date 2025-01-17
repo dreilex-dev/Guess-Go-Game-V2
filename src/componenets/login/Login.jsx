@@ -124,6 +124,7 @@ const Login = () => {
           no_of_hints: existingUser.no_of_hints,
           points: existingUser.points,
           is_playing: existingUser.is_playing,
+          guessedUsers: existingUser.guessedUsers,
         });
 
         toast.success("Welcome back! You have joined the game.");
@@ -173,6 +174,7 @@ const Login = () => {
           no_of_hints: 3,
           points: 0,
           is_playing: "",
+          guessedUsers: [],
         });
 
         await updateDoc(gameLobbyRef, {
@@ -196,6 +198,7 @@ const Login = () => {
             no_of_hints: 3,
             points: 0,
             is_playing: "",
+            guessedUsers: [],
           },
           { merge: true }
         );
@@ -267,6 +270,7 @@ const Login = () => {
         no_of_hints: 3,
         points: 0,
         is_playing: "",
+        guessedUsers: [],
       });
 
       await setDoc(
@@ -281,6 +285,7 @@ const Login = () => {
           no_of_hints: 3,
           points: 0,
           is_playing: "",
+          guessedUsers: [],
         },
         { merge: true }
       );

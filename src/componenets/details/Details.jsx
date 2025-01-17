@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../lib/firebase";
 import { useNavigate } from "react-router-dom";
+import GuessModal from "./guessModal/GuessModal";
 
 const Details = () => {
   const { currentUser, decrementHints } = useUserStore();
@@ -19,6 +20,7 @@ const Details = () => {
   });
 
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (user?.is_playing) {
@@ -134,6 +136,14 @@ const Details = () => {
     navigate("/");
   };
 
+  const handleGuess = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="detail">
       <div className="user">
@@ -175,12 +185,20 @@ const Details = () => {
             <span>Did you figure out who this is?</span>
           </div>
         </div>
-        <button className="btn btn-primary">Click here then</button>
+        <button className="btn btn-primary" onClick={handleGuess}>
+          Click here then
+        </button>
         <button onClick={handleGoBack} className="btn btn-secondary">
           Go back
         </button>
         <LogOutButton />
       </div>
+      {isModalOpen && (
+        <GuessModal
+          handleCloseModal={handleCloseModal}
+          fakeIdentity={userPlayingData}
+        />
+      )}
     </div>
   );
 };
