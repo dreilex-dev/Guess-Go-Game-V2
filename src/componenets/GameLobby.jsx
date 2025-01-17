@@ -10,8 +10,6 @@ const GameLobby = () => {
   const { currentUser, setCurrentUser } = useUserStore();
   const navigate = useNavigate();
 
-  console.log(currentUser);
-
   const handleNavigate = () => {
     navigate("/chat_room");
   };
