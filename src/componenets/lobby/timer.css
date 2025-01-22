@@ -1,0 +1,163 @@
+.timer-container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .bloc-time {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .figure {
+    position: relative;
+    height: 50px;
+    width: 35px;
+    margin-right: 5px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2),
+                inset 2px 4px 0 0 rgba(255, 255, 255, .08);
+    overflow: hidden;
+  }
+  
+  .figure:last-child {
+    margin-right: 0;
+  }
+  
+  .figure > span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font: normal 2.94em/50px 'Lato', sans-serif;
+    font-weight: 700;
+    color: #de4848;
+    text-align: center;
+  }
+  
+  .top, .bottom-back {
+    position: relative;
+    height: 50%;
+    overflow: hidden;
+    background-color: #f7f7f7;
+  }
+  
+  .bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    background-color: #fff;
+  }
+  
+  .bottom:before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, .02);
+  }
+  
+  .top-back {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 50%;
+    background-color: #f7f7f7;
+  }
+  
+  .bottom-back {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    background-color: #fff;
+  }
+  
+  /* Separator între minute și secunde */
+  .bloc-time:first-child:after {
+    content: ":";
+    position: absolute;
+    right: -12px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #f8ffe5;
+    grid-column: 1;
+    grid-row: 1;
+    place-self: center;
+  }
+  
+  /* Animație pentru ultimul minut */
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+  }
+  
+  .countdown.ending {
+    animation: pulse 1s infinite;
+  }
+  
+  /* Gradient pentru cercul de progres */
+  .progress-circle {
+    stroke: url(#timer-gradient);
+  }
+
+.timer {
+    background: linear-gradient(135deg, #06d6a0, #1b9aaa);
+    color: #f8ffe5;
+    border-radius: 12px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    font-weight: bold;
+    font-size: 16px;
+    height: 50px;
+    min-width: 120px;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    overflow: hidden;
+}
+
+.timer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--timer-color), var(--timer-color));
+    opacity: 0.85;
+    transform-origin: left;
+    transform: scaleX(var(--progress));
+    transition: transform 1s linear;
+}
+
+.timer span {
+    position: relative;
+    z-index: 1;
+}
+
+.timer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+}
+
+.timer.ending {
+    animation: pulse 1s infinite;
+}

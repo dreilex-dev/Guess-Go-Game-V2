@@ -134,6 +134,7 @@
   padding: 20px 0;
   height: 600px;
   position: relative;
+
 }
 
 @media (min-width: 768px) {
@@ -216,6 +217,7 @@
   .players-swiper-container {
     padding: 20px 20px;
     height: 500px;
+    border-bottom: 1px solid #dddddd35;
   }
 }
 
@@ -228,6 +230,8 @@
   align-items: center;
   position: relative;
   overflow: visible;
+  border-bottom: 1px solid #dddddd35;
+  border-top: 1px solid #dddddd35;
 }
 
   
