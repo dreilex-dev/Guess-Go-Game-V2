@@ -15,6 +15,7 @@
     box-shadow: 0 10px 20px rgba(6, 214, 160, 0.2);
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
   }
   
   .player-card-container::before {
@@ -99,26 +100,38 @@
   }
   
   /* Responsive adjustments */
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
     .player-card-container {
-      min-width: 250px;
+      min-width: 260px;
       max-width: 300px;
     }
   
     .player-avatar {
-      width: 150px;
-      height: 150px;
+      width: 160px;
+      height: 160px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .player-card-container {
+      min-width: 240px;
+      max-width: 280px;
+    }
+  
+    .player-avatar {
+      width: 140px;
+      height: 140px;
     }
   }
   
   @media (max-width: 480px) {
     .player-card-container {
       min-width: 220px;
-      max-width: 280px;
+      max-width: 260px;
     }
   
     .player-avatar {
-      width: 130px;
-      height: 130px;
+      width: 120px;
+      height: 120px;
     }
   }

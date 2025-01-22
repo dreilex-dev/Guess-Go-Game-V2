@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./gameCode.css";
+import "../details/details.css";
 
 const GameCode = ({ gameCode }) => {
   const [copied, setCopied] = useState(false);
@@ -13,8 +14,8 @@ const GameCode = ({ gameCode }) => {
       .catch((err) => console.error("Failed to copy: ", err));
   };
   return (
-    <div className="game-code-container" onClick={handleCopy} title="Click to copy">
-      <span className="game-code">Code: {gameCode}</span>
+    <div className="btn btn-secondary" onClick={handleCopy} title="Click to copy">
+      <span className="game-code">ID: {gameCode}</span>
       {copied && <span className="copy-feedback">Copied!</span>}
     </div>
   );

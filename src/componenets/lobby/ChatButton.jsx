@@ -1,6 +1,6 @@
 import React from "react";
 import "./chatButton.css";
-
+import "../details/details.css";
 const ChatButton = ({ onChatClick }) => {
   return (
     <button 
