@@ -14,7 +14,7 @@ const GameCode = ({ gameCode }) => {
       .catch((err) => console.error("Failed to copy: ", err));
   };
   return (
-    <div className="btn btn-secondary" onClick={handleCopy} title="Click to copy">
+    <div className="btn btn-secondary game-code-gradient" onClick={handleCopy} title="Click to copy">
       <span className="game-code">ID: {gameCode}</span>
       {copied && <span className="copy-feedback">Copied!</span>}
     </div>

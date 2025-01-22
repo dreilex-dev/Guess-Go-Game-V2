@@ -1,7 +1,7 @@
 import React from "react";
 import "./playerCard.css";
 
-const PlayerCard = ({ avatar }) => {
+const PlayerCard = ({ avatar, username }) => {
   return (
     <div className="player-card-container">
       <img
@@ -9,6 +9,7 @@ const PlayerCard = ({ avatar }) => {
         alt="Player avatar"
         className="player-avatar"
       />
+      <div className="player-username hidden">@{username}</div>
     </div>
   );
 };

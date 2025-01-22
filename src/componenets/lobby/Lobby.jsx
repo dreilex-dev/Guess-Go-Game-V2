@@ -115,7 +115,7 @@ const Lobby = () => {
             <SwiperSlide key={player.id}>
               <PlayerCard
                 avatar={player.avatar}
-                name={player.name}
+                username={player.username}
               />
             </SwiperSlide>
           ))}
