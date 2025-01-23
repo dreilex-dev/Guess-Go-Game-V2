@@ -13,6 +13,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import Timer from "./Timer";
 
 const Lobby = () => {
   const navigate = useNavigate();
@@ -25,7 +26,6 @@ const Lobby = () => {
       try {
         const lobbyRef = doc(db, "gameLobby", lobbyCode);
         const lobbySnap = await getDoc(lobbyRef);
-
         if (lobbySnap.exists()) {
           const lobbyData = lobbySnap.data();
           const participantIds = lobbyData.participants.map(
@@ -84,7 +84,7 @@ const Lobby = () => {
     <div className="lobby-container">
       <div className="lobby-header">
         <div className="lobby-code-container">
-          <GameCode gameCode={lobbyCode} />
+          <Timer players={players} />
         </div>
         <div className="leave-button-container">
           <LeaveButton onLeave={handleLeave} />

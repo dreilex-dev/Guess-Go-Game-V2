@@ -1,50 +1,52 @@
 import React, { useEffect, useState } from 'react';
+import { doc, onSnapshot, updateDoc, getDoc } from 'firebase/firestore';
+import { db } from '../../lib/firebase';
+import { useUserStore } from '../../lib/userStore';
 import './timer.css';
 
 const Timer = ({ players }) => {
   const [timeLeft, setTimeLeft] = useState(0);
+  const { currentUser } = useUserStore();
 
   useEffect(() => {
-    const totalTime = players.length * 2 * 60;
-    setTimeLeft(totalTime);
+    if (!currentUser?.game_code) return;
 
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 0) {
-          clearInterval(timer);
-          return 0;
+    const lobbyRef = doc(db, "gameLobby", currentUser.game_code);
+
+    const unsubscribe = onSnapshot(lobbyRef, async (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        const data = docSnapshot.data();
+        
+        // Verificăm dacă gameState este "ready"
+        if (data.gameState === "ready") {
+          // Dacă nu există timer, îl inițializăm
+          if (!data.timerStart) {
+            const totalTime = players.length * 2 * 60;
+            console.log("Starting timer for", players.length, "players:", totalTime, "seconds");
+            
+            await updateDoc(lobbyRef, {
+              timerStart: Date.now(),
+              timerDuration: totalTime
+            });
+          } else {
+            // Calculăm timpul rămas
+            const elapsed = Math.floor((Date.now() - data.timerStart) / 1000);
+            const remaining = Math.max(0, data.timerDuration - elapsed);
+            setTimeLeft(remaining);
+          }
         }
-        return prev - 1;
-      });
-    }, 1000);
+      }
+    });
 
-    return () => clearInterval(timer);
-  }, [players.length]);
+    return () => unsubscribe();
+  }, [currentUser?.game_code, players.length]);
 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
-  const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-  const totalTime = players.length * 2 * 60;
-  const progress = timeLeft / totalTime;
-  
-  const getTimerColor = () => {
-    if (timeLeft > totalTime / 2) return '#06d6a0';
-    if (timeLeft > 60) return '#ffa500';
-    return '#ff4d4d';
-  };
 
   return (
-    <div className="timer-container">
-      <div 
-        className={`timer ${timeLeft <= 60 ? 'ending' : ''}`}
-        style={{
-          '--progress': progress,
-          '--timer-color': getTimerColor()
-        }}
-      >
-        {formattedTime}
-      </div>
+    <div className="timer">
+      {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
     </div>
   );
 };
