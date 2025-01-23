@@ -75,6 +75,7 @@ const Timer = ({ players }) => {
   const percentage = totalTime > 0 ? (timeLeft / totalTime) * 100 : 0;
 
   const getTimerClass = () => {
+    if (timeLeft === 0) return 'timer-ended';
     if (percentage > 50) return 'timer-safe';
     if (percentage > 25) return 'timer-warning';
     return 'timer-danger';
@@ -82,7 +83,11 @@ const Timer = ({ players }) => {
 
   return (
     <div className={`timer ${getTimerClass()}`}>
-      {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
+      {timeLeft === 0 ? (
+        "Time's up!"
+      ) : (
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+      )}
     </div>
   );
 };

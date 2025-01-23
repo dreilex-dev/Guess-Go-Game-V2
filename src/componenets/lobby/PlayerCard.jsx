@@ -9,7 +9,7 @@ const PlayerCard = ({ avatar, username }) => {
         alt="Player avatar"
         className="player-avatar"
       />
-      <div className="player-username hidden">@{username}</div>
+      <div className="player-username">@{username}</div>
     </div>
   );
 };
