@@ -37,7 +37,18 @@ const Lobby = () => {
             const playerRef = doc(db, "users", playerId);
             const playerSnap = await getDoc(playerRef);
             if (playerSnap.exists()) {
-              fetchedPlayers.push(playerSnap.data());
+              const playerData = playerSnap.data();
+              if (playerData.is_playing) {
+                const playingUserRef = doc(db, "users", playerData.is_playing);
+                const playingUserSnap = await getDoc(playingUserRef);
+                if (playingUserSnap.exists()) {
+                  const playingUserData = playingUserSnap.data();
+                  fetchedPlayers.push({
+                    ...playerData,
+                    playingAs: playingUserData.username
+                  });
+                }
+              }
             }
           }
 
@@ -46,7 +57,7 @@ const Lobby = () => {
           console.error("Lobby does not exist!");
         }
       } catch (error) {
-        console.error("Error fetching lobby players:", error);
+        console.error("Error fetching players:", error);
       }
     };
 
@@ -115,7 +126,7 @@ const Lobby = () => {
             <SwiperSlide key={player.id}>
               <PlayerCard
                 avatar={player.avatar}
-                username={player.username}
+                username={player.playingAs}
               />
             </SwiperSlide>
           ))}
