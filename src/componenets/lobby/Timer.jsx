@@ -7,7 +7,7 @@ import './timer.css';
 const Timer = ({ players }) => {
   const [timeLeft, setTimeLeft] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
-  const { currentUser } = useUserStore();
+  const currentUser = useUserStore((state) => state.currentUser);
 
   useEffect(() => {
     if (!currentUser?.game_code) return;
@@ -52,6 +52,8 @@ const Timer = ({ players }) => {
 
               if (newRemaining === 0) {
                 clearInterval(timerInterval);
+                // Emitem evenimentul când timerul ajunge la 0
+                window.dispatchEvent(new Event('showRealNames'));
               }
             }, 1000);
           }

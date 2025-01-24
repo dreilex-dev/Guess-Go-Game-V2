@@ -1,5 +1,6 @@
 import React from "react";
 import "./playerCard.css";
+import RealUsername from "./RealUsername";
 
 const PlayerCard = ({ avatar, username, playingAs }) => {
   return (
@@ -10,7 +11,7 @@ const PlayerCard = ({ avatar, username, playingAs }) => {
         className="player-avatar"
       />
       <div className="playing-as">Playing as: @{playingAs}</div>
-      <div className="real-username">Real name:@{username}</div>
+      <RealUsername username={username} />
     </div>
   );
 };
