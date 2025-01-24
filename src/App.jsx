@@ -12,6 +12,7 @@ import { db } from "./lib/firebase";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import GameLobby from "./componenets/GameLobby";
 import HomePage from "./componenets/homePage/HomePage";
+import WinnerPage from "./componenets/winnerPage/WinnerPage";
 
 const App = () => {
   const {
@@ -80,7 +81,8 @@ const App = () => {
           )}
         </Routes>
         <Notification />  */}
-        <HomePage />
+        {/* <HomePage /> */}
+        <WinnerPage />
       </div>
       <Notification />
     </Router>
