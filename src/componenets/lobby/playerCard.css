@@ -169,7 +169,7 @@
   border: 1px solid rgba(255, 255, 255, 0.4);
   font-size: 18px;
   font-weight: 600;
-  color: #06d6a0;
+  color: black;
   letter-spacing: 0.5px;
   position: relative;
   width: fit-content;
@@ -207,6 +207,36 @@
     inset 0 1px 2px rgba(255, 255, 255, 0.2);
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 
+      0 2px 8px rgba(27, 154, 170, 0.2),
+      inset 0 1px 4px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 8px 20px rgba(27, 154, 170, 0.4),
+      inset 0 2px 8px rgba(255, 255, 255, 0.4),
+      0 0 15px rgba(27, 154, 170, 0.3);
+  }
+  100% {
+    box-shadow: 
+      0 2px 8px rgba(27, 154, 170, 0.2),
+      inset 0 1px 4px rgba(255, 255, 255, 0.2);
+  }
+}
+
 .real-username {
   background: rgba(27, 154, 170, 0.15);
   padding: 8px 20px;
@@ -220,10 +250,17 @@
   width: fit-content;
   backdrop-filter: blur(4px);
   box-shadow: 
-    0 2px 4px rgba(184, 0, 31, 0.1),
-    inset 0 1px 2px rgba(255, 255, 255, 0.1);
-  transition: all 0.2s ease;
+    0 2px 8px rgba(27, 154, 170, 0.2),
+    inset 0 1px 4px rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  opacity: 0;
+}
+
+.real-username:not(.hidden) {
+  animation: 
+    fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards,
+    glowPulse 3s ease-in-out infinite;
 }
 
 .real-username::before {
@@ -236,10 +273,31 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(27, 154, 170, 0.1) 15%,
-    rgba(27, 154, 170, 0.1) 85%,
+    rgba(27, 154, 170, 0.2) 15%,
+    rgba(27, 154, 170, 0.2) 85%,
     transparent
   );
   z-index: -1;
   border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.real-username:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 
+    0 12px 24px rgba(27, 154, 170, 0.4),
+    inset 0 2px 8px rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(27, 154, 170, 0.3);
+}
+
+.real-username:hover::before {
+  opacity: 0.9;
+  transform: scale(1.1);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(27, 154, 170, 0.3) 15%,
+    rgba(27, 154, 170, 0.3) 85%,
+    transparent
+  );
 }
