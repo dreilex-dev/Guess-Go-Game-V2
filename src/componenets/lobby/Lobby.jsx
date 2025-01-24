@@ -20,6 +20,7 @@ const Lobby = () => {
   const [players, setPlayers] = useState([]);
   const currentUser = useUserStore((state) => state.currentUser);
   const lobbyCode = currentUser?.game_code || "No Lobby Code";
+  const [showRealNames, setShowRealNames] = useState(false);
 
   useEffect(() => {
     const fetchPlayersFromLobby = async () => {

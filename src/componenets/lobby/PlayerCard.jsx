@@ -10,7 +10,7 @@ const PlayerCard = ({ avatar, username, playingAs }) => {
         className="player-avatar"
       />
       <div className="playing-as">Playing as: @{playingAs}</div>
-      <div className="real-username hidden">Real name:@{username}</div>
+      <div className="real-username">Real name:@{username}</div>
     </div>
   );
 };
