@@ -78,8 +78,8 @@ const App = () => {
             </>
           )}
         </Routes>
-        <Notification />
       </div>
+      <Notification />
     </Router>
   );
 };

@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Lobby from "./lobby/Lobby";
+import "./lobby/lobby.css";
 import { useUserStore } from "../lib/userStore";
 import UserModal from "./userModal/UserModal";
 
@@ -7,6 +9,7 @@ const GameLobby = () => {
   const [showModal, setShowModal] = useState(
     localStorage.getItem("modalShown") ? false : true
   );
+
   const { currentUser, setCurrentUser } = useUserStore();
   const navigate = useNavigate();
 
@@ -21,14 +24,9 @@ const GameLobby = () => {
 
   return (
     <>
-      {/***here you code */}
-      <div className="game-lobby">
-        <h1>Game Lobby</h1>
-        <button onClick={handleNavigate} className="navigate-btn">
-          Go to Chat Room
-        </button>
+      <div className="game-lobby-container">
+        <Lobby />
       </div>
-      {/**Till here  */}
       <UserModal display={showModal} handleCloseModal={handleCloseModal} />
     </>
   );

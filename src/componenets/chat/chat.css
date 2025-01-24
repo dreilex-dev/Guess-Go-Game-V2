@@ -58,6 +58,7 @@
       padding: 20px;
       flex: 1;
       overflow: scroll;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 20px;
