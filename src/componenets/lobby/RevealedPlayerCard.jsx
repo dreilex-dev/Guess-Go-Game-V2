@@ -3,7 +3,10 @@ import "./revealedPlayerCard.css";
 
 const RevealedPlayerCard = ({ player }) => {
   return (
-    <div className="player-card-container revealed">
+    <div className="player-card-container">
+      <div className="handle">
+        <span>10 Points</span>
+      </div>
       <img
         src={player.avatar}
         alt="Player avatar"
@@ -14,8 +17,7 @@ const RevealedPlayerCard = ({ player }) => {
         Alias: @{player.playingAs}
         </div>
         <div className="real-username show">
-          <span className="real-player-label">True Identity: </span>
-          <span className="username-text">{player.username}</span>
+        True Identity: @{player.username}
         </div>
       </div>
     </div>
