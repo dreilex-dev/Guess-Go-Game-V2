@@ -19,7 +19,7 @@ import { toast } from "react-toastify";
 import { nanoid } from "nanoid";
 import { useUserStore } from "../../lib/userStore";
 
-const Login = () => {
+const Login = ({ setShowLoader }) => {
   const [avatarJoin, setAvatarJoin] = useState(null);
   const [gameCode, setGameCode] = useState("");
   const [usernameJoin, setUsernameJoin] = useState("");
@@ -324,6 +324,7 @@ const Login = () => {
   useEffect(() => {
     handleAvatarJoin();
     handleAvatarCreate();
+    setShowLoader(true);
   }, []);
 
   return (
