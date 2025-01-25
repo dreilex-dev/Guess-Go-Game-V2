@@ -11,8 +11,7 @@ const RevealedPlayerCard = ({ player }) => {
       />
       <div className="player-info">
         <div className="playing-as revealed-info">
-          <span className="playing-as-label">Alias: </span>
-          {player.playingAs}
+        Alias: @{player.playingAs}
         </div>
         <div className="real-username show">
           <span className="real-player-label">True Identity: </span>
