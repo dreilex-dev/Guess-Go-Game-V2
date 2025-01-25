@@ -137,7 +137,7 @@ const Login = () => {
 
         if (
           gameLobbyData.participants &&
-          gameLobbyData.participants.length >= 6
+          gameLobbyData.participants.length >= 10
         ) {
           toast.error("Sorry, the lobby is full. You cannot join.");
           setLoadingJoin(false);

@@ -7,7 +7,7 @@ import UserModal from "./userModal/UserModal";
 
 const GameLobby = () => {
   const [showModal, setShowModal] = useState(
-    localStorage.getItem("modalShown") ? false : true
+    localStorage.getItem("modalShown") ? true : false
   );
 
   const { currentUser, setCurrentUser } = useUserStore();
@@ -21,7 +21,7 @@ const GameLobby = () => {
     setShowModal(false);
     localStorage.setItem("modalShown", "true");
   };
-
+  console.log(localStorage.getItem("modalShown"));
   return (
     <>
       <div className="game-lobby-container">

@@ -1,3 +1,5 @@
+@import '../typography.css';
+
 .player-card-container {
     text-align: center;
     background: linear-gradient(135deg, #06d6a0, #1b9aaa);
@@ -39,24 +41,26 @@
   }
   
   .player-avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border: 4px solid rgba(255, 255, 255, 0.8);
+    width: 150px;
+    height: 150px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
-  .player-avatar:hover {
-    transform: scale(1.05);
+  .player-avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
   
   .player-name {
-    font-size: 1.5rem;
+    font-family: var(--font-primary);
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
     color: #333;
     margin: 15px 0;
-    font-weight: bold;
   }
   
   .player-card-body {
@@ -72,9 +76,10 @@
   
   .chat-button,
   .reveal-button {
+    font-family: var(--font-primary);
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
     padding: 10px 25px;
-    font-size: 1rem;
-    font-weight: bold;
     color: #fff;
     border: none;
     border-radius: 25px;
@@ -101,9 +106,10 @@
   }
   
   .player-username {
+    font-family: var(--font-primary);
+    font-size: var(--text-base);
+    font-weight: var(--font-medium);
     color: #f8ffe5;
-    font-size: 16px;
-    font-weight: 500;
     text-align: center;
     margin-top: 5px;
   }
@@ -135,6 +141,21 @@
       width: 140px;
       height: 140px;
     }
+  
+    .player-name {
+      font-size: var(--text-base);
+    }
+  
+    .player-username,
+    .chat-button,
+    .reveal-button,
+    .playing-as,
+    .real-username.show,
+    .playing-as-label,
+    .real-player-label,
+    .handle {
+      font-size: var(--text-sm);
+    }
   }
   
   @media (max-width: 480px) {
@@ -162,24 +183,35 @@
   margin-top: 8px;
 }
 
-.playing-as {
+/* Stilul comun pentru toate label-urile */
+.real-player-label, .playing-as-label {
+  font-family: var(--font-secondary);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: #f8ffe5;  /* Aceeași culoare ca textul principal */
+  margin-right: 8px;
+  opacity: 1;  /* Am eliminat transparența */
+  letter-spacing: 0.5px;
+}
+
+.playing-as, .real-username {
   background: rgba(27, 154, 170, 0.15);
   padding: 8px 20px;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.4);
-  font-size: 18px;
-  font-weight: 600;
-  color: black;
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: #f8ffe5;
   letter-spacing: 0.5px;
   position: relative;
   width: fit-content;
   backdrop-filter: blur(4px);
   box-shadow: 
-    0 2px 4px rgba(27, 154, 170, 0.1),
-    inset 0 1px 2px rgba(255, 255, 255, 0.1);
-  transition: all 0.2s ease;
-  margin-top: 10px;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    0 2px 8px rgba(27, 154, 170, 0.2),
+    inset 0 1px 4px rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: default;
 }
 
 .playing-as::before {
@@ -237,26 +269,6 @@
   }
 }
 
-.real-username {
-  background: rgba(27, 154, 170, 0.15);
-  padding: 8px 20px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  font-size: 18px;
-  font-weight: 600;
-  color: #f8ffe5;
-  letter-spacing: 0.5px;
-  position: relative;
-  width: fit-content;
-  backdrop-filter: blur(4px);
-  box-shadow: 
-    0 2px 8px rgba(27, 154, 170, 0.2),
-    inset 0 1px 4px rgba(255, 255, 255, 0.2);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  opacity: 0;
-}
-
 .real-username:not(.hidden) {
   animation: 
     fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards,
@@ -300,4 +312,11 @@
     rgba(27, 154, 170, 0.3) 85%,
     transparent
   );
+}
+
+.handle {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  /* ... restul stilurilor existente ... */
 }

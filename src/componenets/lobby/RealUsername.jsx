@@ -22,7 +22,8 @@ const RealUsername = ({ username }) => {
 
   return (
     <div className="real-username" ref={realNameRef}>
-      {username}
+      <span className="real-player-label">Real player:</span>
+      <span className="username-text">{username}</span>
     </div>
   );
 };

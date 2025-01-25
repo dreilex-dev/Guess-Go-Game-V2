@@ -1,8 +1,11 @@
+@import '../typography.css';
+
 .timer {
   padding: 10px 20px;
   border-radius: 8px;
-  font-size: 20px;
-  font-weight: bold;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
   text-align: center;
   transition: all 0.3s ease;
   color: #f8ffe5;
@@ -68,5 +71,12 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .timer {
+    font-size: var(--text-lg);
+    padding: 8px 16px;
   }
 }

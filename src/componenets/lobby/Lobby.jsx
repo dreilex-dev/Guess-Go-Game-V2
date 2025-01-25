@@ -14,6 +14,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Timer from "./Timer";
+import RevealedPlayerCard from "./RevealedPlayerCard";
 
 const Lobby = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const Lobby = () => {
   const currentUser = useUserStore((state) => state.currentUser);
   const lobbyCode = currentUser?.game_code || "No Lobby Code";
   const [showRealNames, setShowRealNames] = useState(false);
+  const [isTimeUp, setIsTimeUp] = useState(false);
 
   useEffect(() => {
     const fetchPlayersFromLobby = async () => {
@@ -64,6 +66,15 @@ const Lobby = () => {
 
     fetchPlayersFromLobby();
   }, [lobbyCode]);
+
+  useEffect(() => {
+    const handleTimeUp = () => {
+      setIsTimeUp(true);
+    };
+    
+    window.addEventListener('showRealNames', handleTimeUp);
+    return () => window.removeEventListener('showRealNames', handleTimeUp);
+  }, []);
 
   const handleChat = (player) => {
     navigate('/chat_room');
@@ -125,11 +136,11 @@ const Lobby = () => {
         >
           {players.map((player) => (
             <SwiperSlide key={player.id}>
-              <PlayerCard
-                avatar={player.avatar}
-                playingAs={player.playingAs}
-                username={player.username}
-              />
+              {isTimeUp ? (
+                <RevealedPlayerCard player={player} />
+              ) : (
+                <PlayerCard player={player} onPlayerClick={handleChat} />
+              )}
             </SwiperSlide>
           ))}
         </Swiper>
