@@ -24,6 +24,9 @@ module.exports = {
     screens: {
       lg: '1280px',
     },
+    backgroundImage: {
+      'gradient-primary': 'linear-gradient(90deg, #57DFF2 0%, #209AAB 50%, #57DFF2 100%)',
+    },
   },
   plugins: [],
 }

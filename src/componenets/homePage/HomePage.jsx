@@ -1,21 +1,34 @@
 import { useNavigate } from 'react-router-dom'
 import Button from '../button/Button'
 import Logo from '../../assets/logo.svg'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import clsx from 'clsx'
+import Loader from '../loader/Loader'
 
-const HomePage = () => {
+const HomePage = ({ setShowLoader, showLoader }) => {
     const navigate = useNavigate();
-
-    const handleNavigate = () => {
-        navigate('/game');
-    };
-
     const [isOpen, setIsOpen] = useState(false);
 
+    // Show loader on initial mount
+    useEffect(() => {
+        setShowLoader(true);
+        // Hide loader after animation
+        const timer = setTimeout(() => {
+            setShowLoader(false);
+        }, 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    const handleNavigate = () => {
+        if (!showLoader) {
+            setShowLoader(true);
+            navigate('/game', { replace: true });
+        }
+    };
+
     return (
-        <section>
-            <div className="h-screen w-screen">
+        <section className="relative">
+            <div className={`h-screen w-screen ${showLoader ? 'invisible' : ''}`}>
                 <div className="mx-4 lg:mx-10 pt-5">
                     <Button 
                         variant="secondaryWhite"
@@ -37,9 +50,10 @@ const HomePage = () => {
                 <div className="bg-white w-full h-[17vh] flex items-center justify-center rounded-tr-[35px] rounded-tl-[35px] absolute bottom-0">
                     <Button 
                         variant="primaryWhite" 
-                        onClick={handleNavigate}>
+                        onClick={handleNavigate}
+                        disabled={showLoader}>
                         Start
-                        </Button>
+                    </Button>
                 </div>
             </div>
         

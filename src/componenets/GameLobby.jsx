@@ -5,13 +5,17 @@ import "./lobby/lobby.css";
 import { useUserStore } from "../lib/userStore";
 import UserModal from "./userModal/UserModal";
 
-const GameLobby = () => {
+const GameLobby = ({ setShowLoader }) => {
   const [showModal, setShowModal] = useState(
     localStorage.getItem("modalShown") ? true : false
   );
 
   const { currentUser, setCurrentUser } = useUserStore();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setShowLoader(true);
+  }, []);
 
   const handleNavigate = () => {
     navigate("/chat_room");
