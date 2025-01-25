@@ -39,17 +39,18 @@
   }
   
   .player-avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border: 4px solid rgba(255, 255, 255, 0.8);
+    width: 150px;
+    height: 150px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
-  .player-avatar:hover {
-    transform: scale(1.05);
+  .player-avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
   
   .player-name {
@@ -162,24 +163,35 @@
   margin-top: 8px;
 }
 
-.playing-as {
+/* Stilul comun pentru toate label-urile */
+.real-player-label, .playing-as-label {
+  color: #f8ffe5;  /* Aceeași culoare ca textul principal */
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 8px;
+  opacity: 1;  /* Am eliminat transparența */
+  letter-spacing: 0.5px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.playing-as, .real-username {
   background: rgba(27, 154, 170, 0.15);
   padding: 8px 20px;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.4);
   font-size: 18px;
   font-weight: 600;
-  color: black;
+  color: #f8ffe5;
   letter-spacing: 0.5px;
   position: relative;
   width: fit-content;
   backdrop-filter: blur(4px);
   box-shadow: 
-    0 2px 4px rgba(27, 154, 170, 0.1),
-    inset 0 1px 2px rgba(255, 255, 255, 0.1);
-  transition: all 0.2s ease;
-  margin-top: 10px;
+    0 2px 8px rgba(27, 154, 170, 0.2),
+    inset 0 1px 4px rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  cursor: default;
 }
 
 .playing-as::before {
@@ -235,26 +247,6 @@
       0 2px 8px rgba(27, 154, 170, 0.2),
       inset 0 1px 4px rgba(255, 255, 255, 0.2);
   }
-}
-
-.real-username {
-  background: rgba(27, 154, 170, 0.15);
-  padding: 8px 20px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  font-size: 18px;
-  font-weight: 600;
-  color: #f8ffe5;
-  letter-spacing: 0.5px;
-  position: relative;
-  width: fit-content;
-  backdrop-filter: blur(4px);
-  box-shadow: 
-    0 2px 8px rgba(27, 154, 170, 0.2),
-    inset 0 1px 4px rgba(255, 255, 255, 0.2);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  opacity: 0;
 }
 
 .real-username:not(.hidden) {
