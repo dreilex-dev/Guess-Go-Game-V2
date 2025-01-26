@@ -11,6 +11,8 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "./lib/firebase";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import GameLobby from "./componenets/GameLobby";
+import React from "react";
+import { ScoreProvider } from './context/ScoreContext';
 
 const App = () => {
   const {
@@ -51,36 +53,38 @@ const App = () => {
 
   if (isLoading) return <div className="loading">Loading..</div>;
   return (
-    <Router>
-      <div className="container">
-        <Routes>
-          {!currentUser && <Route path="*" element={<Login />} />}
-          {currentUser && gameState !== "ready" && (
-            <Route path="*" element={<AddUser />} />
-          )}
-          {currentUser && gameState === "ready" && (
-            <>
-              <Route path="/" element={<GameLobby />} />{" "}
-              <Route
-                path="/chat_room"
-                element={
-                  <>
-                    <List />
-                    {chatId && (
-                      <>
-                        <Chat />
-                        <Details />
-                      </>
-                    )}
-                  </>
-                }
-              />
-            </>
-          )}
-        </Routes>
-      </div>
-      <Notification />
-    </Router>
+    <ScoreProvider>
+      <Router>
+        <div className="container">
+          <Routes>
+            {!currentUser && <Route path="*" element={<Login />} />}
+            {currentUser && gameState !== "ready" && (
+              <Route path="*" element={<AddUser />} />
+            )}
+            {currentUser && gameState === "ready" && (
+              <>
+                <Route path="/" element={<GameLobby />} />{" "}
+                <Route
+                  path="/chat_room"
+                  element={
+                    <>
+                      <List />
+                      {chatId && (
+                        <>
+                          <Chat />
+                          <Details />
+                        </>
+                      )}
+                    </>
+                  }
+                />
+              </>
+            )}
+          </Routes>
+        </div>
+        <Notification />
+      </Router>
+    </ScoreProvider>
   );
 };
 

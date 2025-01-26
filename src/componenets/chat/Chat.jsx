@@ -135,7 +135,7 @@ const Chat = () => {
           />
           <div className="texts">
             <span>
-              {userPlayingData ? userPlayingData.username : "Loading..."}
+              {userPlayingData ? userPlayingData.playingAs : "Loading..."}
             </span>
             <p>Guess who am I ! </p>
           </div>
