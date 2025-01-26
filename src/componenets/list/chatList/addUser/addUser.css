@@ -2,8 +2,14 @@
   width: max-content;
   height: max-content;
   padding: 30px;
-  background-color: rgba(17, 25, 40, 0.781);
-  border-radius: 10px;
+  color: #09464e;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.16);
+  border-radius: 30px;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -49,7 +55,7 @@
     justify-content: space-between;
     padding: 10px;
     border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.8);
   }
 
   .detail {
@@ -68,17 +74,19 @@
 
   button {
     display: flex;
-    padding: 10px;
+    padding: 15px 20px;
     border-radius: 10px;
     background-color: #b8001f;
     color: white;
     border: none;
     cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
     font-family: Arial, Helvetica, sans-serif;
   }
 
   button:hover {
-    background-color: #99021b;
+    background-color: #e47386;
   }
 
   .closeBtn {

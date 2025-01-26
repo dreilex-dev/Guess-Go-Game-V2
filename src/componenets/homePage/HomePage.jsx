@@ -9,10 +9,8 @@ const HomePage = ({ setShowLoader, showLoader }) => {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
 
-    // Show loader on initial mount
     useEffect(() => {
         setShowLoader(true);
-        // Hide loader after animation
         const timer = setTimeout(() => {
             setShowLoader(false);
         }, 2000);
@@ -27,7 +25,7 @@ const HomePage = ({ setShowLoader, showLoader }) => {
     };
 
     return (
-        <section className="relative">
+        <section className="relative bg-blue-lighter">
             <div className={`h-screen w-screen ${showLoader ? 'invisible' : ''}`}>
                 <div className="mx-4 lg:mx-10 pt-5">
                     <Button 

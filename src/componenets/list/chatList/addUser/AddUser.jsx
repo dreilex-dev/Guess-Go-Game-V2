@@ -199,7 +199,7 @@ const AddUser = () => {
           )}
         </>
       )}
-      <button onClick={handlePlayersReady}>All Players Are Ready?</button>
+      <button onClick={handlePlayersReady}>Everyone Ready?</button>
     </div>
   );
 };

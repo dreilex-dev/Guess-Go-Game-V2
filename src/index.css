@@ -16,12 +16,14 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   color: white;
+  background-image: url("/background/88.png");
 }
+
 
 .container {
   width: 80vw;
@@ -143,3 +145,4 @@ button {
   margin-bottom: 10px;
   object-fit: cover;
 }
+
