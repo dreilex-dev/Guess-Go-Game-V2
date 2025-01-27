@@ -2,7 +2,7 @@
     flex: 2;
     border-left: 1px solid #dddddd35;
     border-right: 1px solid #dddddd35;
-    height: 100%;
+    height: 90vh;
     display: flex;
     flex-direction: column;
   
@@ -13,7 +13,7 @@
       justify-content: space-between;
       border-bottom: 1px solid #dddddd35;
   
-      .user {
+      .userChatSection {
         display: flex;
         align-items: center;
         gap: 20px;

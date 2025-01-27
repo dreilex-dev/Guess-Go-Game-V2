@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Lobby from "./lobby/Lobby";
 import "./lobby/lobby.css";
@@ -6,20 +6,24 @@ import { useUserStore } from "../lib/userStore";
 import UserModal from "./userModal/UserModal";
 
 const GameLobby = () => {
-  const [showModal, setShowModal] = useState(
-    localStorage.getItem("modalShown") ? true : false
-  );
+  const [showModal, setShowModal] = useState(false);
+  const { currentUser} = useUserStore();
 
-  const { currentUser, setCurrentUser } = useUserStore();
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (currentUser) {
+      const modalShownKey = `modalShown_${currentUser.id}`;
+      if (!localStorage.getItem(modalShownKey)) {
+        setShowModal(true);
+      }
+    }
+  }, [currentUser]);
 
-  const handleNavigate = () => {
-    navigate("/chat_room");
-  };
 
   const handleCloseModal = () => {
     setShowModal(false);
-    localStorage.setItem("modalShown", "true");
+    if (currentUser?.id) {
+      localStorage.setItem(`modalShown_${currentUser.id}`, "true");
+    }
   };
   console.log(localStorage.getItem("modalShown"));
   return (

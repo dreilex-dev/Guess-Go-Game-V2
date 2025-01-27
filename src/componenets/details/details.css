@@ -53,7 +53,7 @@
     background-color: #f8ffe5;
     color: black;
   }
-  .user {
+  .userDetailSection {
     padding: 30px 20px;
     display: flex;
     flex-direction: column;

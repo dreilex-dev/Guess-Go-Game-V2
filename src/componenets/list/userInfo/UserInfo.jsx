@@ -55,7 +55,7 @@ const UserInfo = () => {
   return (
     <div className="userInfo">
       <div className="playingUser">
-        <div className="user">
+        <div className="userInfoSection">
           <img
             src={userPlayingData.avatar || "/avatar.png"}
             alt="Playing User Avatar"

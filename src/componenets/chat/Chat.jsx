@@ -27,7 +27,7 @@ const Chat = () => {
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behaviour: "smooth" });
-  }, []);
+  }, [chat?.messages]);
 
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
@@ -128,7 +128,7 @@ const Chat = () => {
   return (
     <div className="chat">
       <div className="top">
-        <div className="user">
+        <div className="userChatSection">
           <img
             src={userPlayingData ? userPlayingData.avatar : "/avatar.png"}
             alt="avatar"

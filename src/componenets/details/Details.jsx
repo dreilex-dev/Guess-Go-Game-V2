@@ -146,7 +146,7 @@ const Details = () => {
 
   return (
     <div className="detail">
-      <div className="user">
+      <div className="userDetailSection">
         <img
           src={userPlayingData?.avatar || "/avatar.png"}
           alt={`${userPlayingData?.username || "User"}'s avatar`}
