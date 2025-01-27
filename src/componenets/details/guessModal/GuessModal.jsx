@@ -35,6 +35,11 @@ const GuessModal = ({ handleCloseModal }) => {
       return;
     }
 
+    addGuess(user.id, guess);
+    setGuess("");
+    handleCloseModal();
+  };
+
     if (!fakeIdentity || !fakeIdentity.username) {
       toast.error("Player identity not found!");
       return;
