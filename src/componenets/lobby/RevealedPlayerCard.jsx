@@ -11,20 +11,24 @@ const RevealedPlayerCard = ({ player, rank }) => {
     switch (rank) {
       case 1:
         return { 
-          border: "1px solid #FFD700", // Gold
-          boxShadow: "0 0 10px rgba(255, 215, 0, 0.5)", // Blur effect pentru gold
-          text: "Winner"
+          border: "2px solid #FFD700", // Gold
+          borderTop: "none", // Eliminăm bordura de sus
+          boxShadow: "0 0 10px rgba(255, 215, 0, 0.5)", 
+          text: "Winner",
+          className: "winner-handle"
         }; 
       case 2:
         return { 
-          border: "1px solid #C0C0C0", // Silver
-          boxShadow: "0 0 10px rgba(192, 192, 192, 0.5)", // Blur effect pentru silver
+          border: "2px solid #C0C0C0", // Silver
+          borderTop: "none", // Eliminăm bordura de sus
+          boxShadow: "0 0 10px rgba(192, 192, 192, 0.5)",
           text: "2nd Place"
         }; 
       case 3:
         return { 
-          border: "1px solid #CD7F32", // Bronze
-          boxShadow: "0 0 10px rgba(205, 127, 50, 0.5)", // Blur effect pentru bronze
+          border: "2px solid #CD7F32", // Bronze
+          borderTop: "none", // Eliminăm bordura de sus
+          boxShadow: "0 0 10px rgba(205, 127, 50, 0.5)",
           text: "3rd Place"
         }; 
       default:
@@ -67,11 +71,11 @@ const RevealedPlayerCard = ({ player, rank }) => {
   return (
     <div className="player-card-container">
       <div 
-        className="handle" 
+        className={`handle ${rankStyle.className || ''}`}
         style={{ 
-          border: rankStyle.border,
-          boxShadow: rankStyle.boxShadow,
-          color: "#FFFFFF" // Text alb pentru toate pozițiile
+          ...rankStyle,
+          color: "#FFFFFF",
+          background: "transparent"
         }}
       >
         <span>
