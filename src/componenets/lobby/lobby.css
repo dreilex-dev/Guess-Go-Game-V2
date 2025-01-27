@@ -145,13 +145,15 @@
 .players-swiper {
     width: 100%;
     height: 100%;
-    padding: 20px 0;
+    padding: 20px;
 }
 
 .swiper-wrapper {
     display: flex;
     align-items: center;
     height: 100%;
+    gap: 10px;
+    flex-direction: row;
 }
 
 .players-swiper-outer {
@@ -170,7 +172,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: auto;
     padding: 10px;
 }
 
@@ -195,15 +196,46 @@
     opacity: 1;
 }
 
-@media (min-width: 768px) {
+/* Media Queries pentru diferite dimensiuni de ecran */
+@media (max-width: 480px) {
     .players-swiper-container {
+        padding: 20px 20px;
+        height: 500px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .players-swiper-container {
+        padding: 20px 30px;
         height: 550px;
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1024px) {
     .players-swiper-container {
         height: 600px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .players-swiper-container {
+        height: 600px;
+    }
+    
+    .players-swiper {
+        max-width: 1400px;  /* Limitează lățimea maximă */
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1441px) {
+    .players-swiper-container {
+        height: 600px;
+    }
+    
+    .players-swiper {
+        max-width: 1400px;  /* Menține lățimea maximă și la ecrane mari */
+        margin: 0 auto;
     }
 }
 
@@ -254,36 +286,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: auto;
     padding: 10px;
-}
-
-@media (max-width: 768px) {
-    .players-swiper-container {
-        padding: 20px 30px;
-        height: 550px;
-    }
-}
-
-@media (max-width: 480px) {
-    .players-swiper-container {
-        padding: 20px 20px;
-        height: 500px;
-        border-bottom: 1px solid #dddddd35;
-    }
-}
-
-.players-swiper-outer {
-    width: 100%;
-    padding: 0 60px;
-    margin: auto;
-    flex:1;
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: visible;
-    border-bottom: 1px solid #dddddd35;
-    border-top: 1px solid #dddddd35;
+    margin-right: 0 !important;
 }
 
 /* Timer */
@@ -332,5 +336,10 @@
         font-size: var(--text-lg);
         padding: 12px 24px;
     }
+}
+
+.player-card {
+    width: 100%;
+    margin: 0 auto;
 }
   

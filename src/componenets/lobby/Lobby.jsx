@@ -92,6 +92,8 @@ const Lobby = () => {
     navigate('/chat_room');
   };
 
+  const sortedPlayers = players.sort((a, b) => (b.points || 0) - (a.points || 0));
+
   return (
     <div className="lobby-container">
       <div className="lobby-header">
@@ -112,43 +114,36 @@ const Lobby = () => {
           slidesPerView={3}
           breakpoints={{
             320: {
-              slidesPerView: 1.2,
+              slidesPerView: 1,
               spaceBetween: 20,
             },
-            480: {
+            481: {
               slidesPerView: 2,
-              spaceBetween: 20,
+              spaceBetween: 25,
             },
-            768: {
+            769: {
               slidesPerView: 3,
-              spaceBetween: 30,
-            },
-            1024: {
-              slidesPerView: 3,
-              spaceBetween: 30,
-            },
-            1440: {
-              slidesPerView: 4,
               spaceBetween: 30,
             }
           }}
           className="players-swiper"
         >
-          {players.map((player) => (
+          {sortedPlayers.map((player, index) => (
             <SwiperSlide key={player.id}>
-              {isTimeUp ? (
-                <RevealedPlayerCard player={player} />
-              ) : (
-                <PlayerCard player={player} onPlayerClick={handleChat} />
-              )}
+              <RevealedPlayerCard 
+                player={player} 
+                rank={index + 1} 
+              />
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      <div className="chat-button-container">
-        <ChatButton onChatClick={handleChatClick} />
-      </div>
+      {!isTimeUp && (
+        <div className="chat-button-container">
+          <ChatButton onChatClick={handleChatClick} />
+        </div>
+      )}
     </div>
   );
 };
