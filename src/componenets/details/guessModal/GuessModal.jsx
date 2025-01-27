@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useScores } from "../../../context/ScoreContext";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../lib/firebase";
 import { useUserStore } from "../../../lib/userStore";
 import { useChatStore } from "../../../lib/chatStore";
-import { getDoc, doc } from "firebase/firestore";
-import { db } from "../../../lib/firebase";
-import "./guessModal.css";
+import { useScores } from "../../../context/ScoreContext";
 import { toast } from "react-toastify";
+import "./guessModal.css";
 
 const GuessModal = ({ handleCloseModal }) => {
-  const { currentUser } = useUserStore();
+  const { currentUser, addGuess } = useUserStore();
   const { user } = useChatStore();
   const [guess, setGuess] = useState("");
   const { scores, setScores } = useScores();
@@ -35,22 +35,17 @@ const GuessModal = ({ handleCloseModal }) => {
       return;
     }
 
-    addGuess(user.id, guess);
-    setGuess("");
-    handleCloseModal();
-  };
-
     if (!fakeIdentity || !fakeIdentity.username) {
       toast.error("Player identity not found!");
       return;
     }
 
     const normalizedGuess = guess.trim().toLowerCase();
-    const normalizedUsername = fakeIdentity.username.trim().toLowerCase();
+    const normalizedPlayingAs = fakeIdentity.username.trim().toLowerCase();
 
-    console.log("Guess:", normalizedGuess, "Username:", normalizedUsername);
+    console.log("Guess:", normalizedGuess, "Playing As:", normalizedPlayingAs);
 
-    if (normalizedGuess === normalizedUsername) {
+    if (normalizedGuess === normalizedPlayingAs) {
       setScores((prevScores) => {
         const currentScore = prevScores[currentUser.id] || 0;
         const updatedScores = {
@@ -74,8 +69,9 @@ const GuessModal = ({ handleCloseModal }) => {
       toast.error("Wrong guess!");
     }
 
-    setGuess(""); // Resetează inputul
-    handleCloseModal(); // Închide modalul
+    addGuess(user.id, guess);
+    setGuess("");
+    handleCloseModal();
   };
 
   return (

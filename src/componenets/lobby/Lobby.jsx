@@ -130,10 +130,16 @@ const Lobby = () => {
         >
           {sortedPlayers.map((player, index) => (
             <SwiperSlide key={player.id}>
-              <RevealedPlayerCard 
-                player={player} 
-                rank={index + 1} 
-              />
+              {isTimeUp ? (
+                <RevealedPlayerCard 
+                  player={player} 
+                  rank={index + 1} 
+                />
+              ) : (
+                <PlayerCard 
+                  player={player}
+                />
+              )}
             </SwiperSlide>
           ))}
         </Swiper>
