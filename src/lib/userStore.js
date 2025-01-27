@@ -2,6 +2,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { create } from "zustand";
 import { db } from "./firebase";
 import { toast } from "react-toastify";
+import { useChatStore } from "./chatStore";
 
 export const useUserStore = create((set, get) => ({
   currentUser: null,
@@ -55,52 +56,59 @@ export const useUserStore = create((set, get) => ({
       }));
     } catch (err) {
       console.error("Error incrementing points:", err);
-    }
-  },*/
-
-  addGuess: async (userId, guessedUsername) => {
-    try {
-      const state = get();
-      const currentUser = state.currentUser;
-
-      if (!currentUser) {
-        console.error("No current user found!");
-        return;
       }
+    },*/
 
-      if (!currentUser.guessedUsers) {
-        currentUser.guessedUsers = [];
+    addGuess: async (userId, guessedUsername) => {
+      try {
+        console.log(userId,guessedUsername)
+        const state = get();
+        const currentUser = state.currentUser;
+    
+        if (!currentUser) {
+          console.error("No current user found!");
+          return;
+        }
+
+        const chatStore = useChatStore.getState();
+        const chatUser = chatStore.user;
+
+        if (!chatUser) {
+          console.error("No active chat user found!");
+          return;
+        }
+    
+        const guessedUsers = currentUser.guessedUsers || [];
+    
+        if (guessedUsers.includes(userId)) {
+          toast.error("You have already guessed for this user!");
+          return;
+        }
+    
+        const isCorrectGuess =
+          guessedUsername.trim().toLowerCase() ===
+          chatUser.username.toLowerCase();
+    
+        const updatedData = {
+          guessedUsers: [...guessedUsers, userId],
+          ...(isCorrectGuess && { points: (currentUser.points || 0) + 1 }),
+        };
+    
+        const docRef = doc(db, "users", currentUser.id);
+        await updateDoc(docRef, updatedData);
+    
+        set({
+          currentUser: {
+            ...currentUser,
+            ...updatedData,
+          },
+        });
+      } catch (error) {
+        console.error("Error handling guess:", error);
+        toast.error("Something went wrong. Please try again.");
       }
-
-      if (currentUser.guessedUsers.includes(userId)) {
-        toast.error("You have already guessed for this user!");
-        return;
-      }
-
-      const isCorrectGuess =
-        guessedUsername.trim().toLowerCase() ===
-        state.playingUser?.username.toLowerCase();
-
-      const docRef = doc(db, "users", currentUser.id);
-      await updateDoc(docRef, {
-        guessedUsers: [...currentUser.guessedUsers, userId],
-        ...(isCorrectGuess && { points: (currentUser.points || 0) + 1 }),
-      });
-
-      set({
-        currentUser: {
-          ...currentUser,
-          guessedUsers: [...currentUser.guessedUsers, userId],
-          points: isCorrectGuess
-            ? (currentUser.points || 0) + 1
-            : currentUser.points,
-        },
-      });
-    } catch (error) {
-      console.error("Error handling guess:", error);
-      toast.error("Something went wrong. Please try again.");
-    }
-  },
+    },
+    
 
   decrementHints: async () => {
     try {
