@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Lobby from "./lobby/Lobby";
 import "./lobby/lobby.css";
@@ -7,7 +7,7 @@ import UserModal from "./userModal/UserModal";
 
 const GameLobby = ({ setShowLoader }) => {
   const [showModal, setShowModal] = useState(
-    localStorage.getItem("modalShown") ? true : false
+    !localStorage.getItem("modalShown")
   );
 
   const { currentUser, setCurrentUser } = useUserStore();
@@ -15,7 +15,8 @@ const GameLobby = ({ setShowLoader }) => {
 
   useEffect(() => {
     setShowLoader(true);
-  }, []);
+    return () => setShowLoader(false);
+  }, [setShowLoader]);
 
   const handleNavigate = () => {
     navigate("/chat_room");

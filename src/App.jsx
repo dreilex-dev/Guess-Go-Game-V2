@@ -61,53 +61,52 @@ const App = () => {
   if (isLoading) return <div className="loading">Loading..</div>;
   return (
     <Router>
-        {showLoader && <Loader onLoadingComplete={handleLoadingComplete} />}
-          <Routes>
-            <Route 
-              path="/" 
-            element={
-              <HomePage 
-                showLoader={showLoader} 
-                setShowLoader={setShowLoader} 
-              />
-            } 
+      {showLoader && <Loader onLoadingComplete={handleLoadingComplete} />}
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <HomePage 
+              showLoader={showLoader} 
+              setShowLoader={setShowLoader} 
+            />
+          } 
+        />
+        
+        {!currentUser ? (
+          <Route 
+            path="/game/*" 
+            element={<Login setShowLoader={setShowLoader} />} 
           />
-          {!currentUser && (
+        ) : gameState === "ready" ? (
+          <>
             <Route 
-              path="/game/*" 
-              element={<Login setShowLoader={setShowLoader} />} 
+              path="/game" 
+              element={<GameLobby setShowLoader={setShowLoader} />} 
             />
-          )}
-          {currentUser && gameState !== "ready" && (
-            <Route 
-              path="/game/*" 
-              element={<AddUser setShowLoader={setShowLoader} />} 
+            <Route
+              path="/chat_room"
+              element={
+                <>
+                  <List setShowLoader={setShowLoader} />
+                  {chatId && (
+                    <>
+                      <Chat />
+                      <Details />
+                    </>
+                  )}
+                </>
+              }
             />
-          )}
-          {currentUser && gameState === "ready" && (
-            <>
-              <Route 
-                path="/game" 
-                element={<GameLobby setShowLoader={setShowLoader} />} 
-              />
-              <Route
-                path="/chat_room"
-                element={
-                  <>
-                    <List setShowLoader={setShowLoader} />
-                    {chatId && (
-                      <>
-                        <Chat />
-                        <Details />
-                      </>
-                    )}
-                  </>
-                }
-              />
-            </>
-          )}
-        </Routes>
-        <Notification />
+          </>
+        ) : (
+          <Route 
+            path="/game/*" 
+            element={<AddUser setShowLoader={setShowLoader} />} 
+          />
+        )}
+      </Routes>
+      <Notification />
     </Router>
   );
 };

@@ -109,6 +109,8 @@ const Lobby = () => {
           navigation
           pagination={{ clickable: true }}
           spaceBetween={30}
+          loop={false}
+          allowTouchMove={true}
           slidesPerView={3}
           breakpoints={{
             320: {

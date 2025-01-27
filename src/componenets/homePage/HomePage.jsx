@@ -36,6 +36,7 @@ const HomePage = ({ setShowLoader, showLoader }) => {
                     <div className="flex flex-col items-center justify-center gap-8 lg:gap-4 mt-10 lg:mt-5">
                         <h1>
                             <img 
+                                className="max-w-[600px]"
                                 src={Logo} 
                                 alt="logo" 
                             />
