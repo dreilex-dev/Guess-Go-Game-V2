@@ -105,6 +105,10 @@ const App = () => {
             element={<AddUser setShowLoader={setShowLoader} />} 
           />
         )}
+          <Route 
+            path="/winner" 
+            element={<WinnerPage setShowLoader={setShowLoader} />} 
+        />
       </Routes>
       <Notification />
     </Router>
