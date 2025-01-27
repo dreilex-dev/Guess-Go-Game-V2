@@ -12,7 +12,7 @@ const PlayerCard = ({ player,avatar, username, playingAs }) => {
         className="player-avatar"
       />
       <div className="playing-as">
-        Alias: @{player.playingAs}
+        Alias:{player.playingAs}
         </div>
     </div>
   );
