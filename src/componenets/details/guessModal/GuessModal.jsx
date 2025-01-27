@@ -16,6 +16,7 @@ const GuessModal = ({ handleCloseModal, fakeIdentity }) => {
     }
     addGuess(user.id, guess);
     setGuess("");
+    handleCloseModal();
   };
 
   const handleKeyDown = (e) => {
