@@ -122,6 +122,17 @@
   align-items: center; 
   justify-content: center; 
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.game-code-label:hover {
+  opacity: 0.8;
+}
+
+.game-code-label:active {
+  transform: scale(0.98);
 }
 
 .usersSlider {
@@ -151,9 +162,6 @@
   font-size: 16px;
   color: white;
 }
-
-
-
 
 .slick-prev,
 .slick-next {

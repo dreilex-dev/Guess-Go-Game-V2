@@ -70,7 +70,10 @@ const AddUser = () => {
     ],
   };
   
-  
+  const handleCopyGameCode = () => {
+    navigator.clipboard.writeText(currentUser.game_code);
+    toast.success("Game code copied to clipboard!");
+  }
 
   
 
@@ -265,7 +268,14 @@ const AddUser = () => {
 
   <div className="controls">
     {currentUser.game_code && (
-      <div className="game-code-label">
+      <div 
+        className="game-code-label"
+        onClick={() => {
+          navigator.clipboard.writeText(currentUser.game_code);
+          toast.success("Game code copied!");
+        }}
+        title="Click to copy game code"
+      >
         <span>Game Code: {currentUser.game_code}</span>
       </div>
     )}
