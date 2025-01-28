@@ -133,7 +133,7 @@ const Details = () => {
   };
 
   const handleGoBack = () => {
-    navigate("/");
+    navigate("/game");
   };
 
   const handleGuess = () => {

@@ -1,26 +1,28 @@
 .leave-button {
-    padding: 10px 20px;
+    padding: 10px 10px;
     font-size: 16px;
+    text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: bold;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
     height: 50px;
     min-width: 120px; 
     display: flex;
     align-items: center;
     justify-content: center; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: #dc3545;
+    background: linear-gradient(45deg,  #57DFF2, #004D74); 
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
     color: #fff;
     border: none;
     margin-left: auto;
+    
   }
   
   .leave-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
-    background-color: #c82333;
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, #8afbff, #ffffff); 
+    color: #00647A;
   }
 
   .leave-button-size{

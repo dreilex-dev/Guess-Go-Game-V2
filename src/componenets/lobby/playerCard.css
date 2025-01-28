@@ -2,7 +2,7 @@
 
 .player-card-container {
     text-align: center;
-    background: linear-gradient(135deg, #06d6a0, #1b9aaa);
+    background: linear-gradient(135deg, #b5f3fc, #198f9e);
     border-radius: 20px;
     padding: 20px;
     margin: 10px;
@@ -14,7 +14,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 30px hwb(0 100% 0% / 0.3);
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
@@ -35,10 +35,10 @@
     z-index: 1;
   }
   
-  .player-card-container:hover {
+  /* .player-card-container:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 30px rgba(6, 214, 160, 0.3);
-  }
+  } */
   
   .player-avatar {
     width: 150px;
@@ -101,8 +101,7 @@
   
   .chat-button:hover,
   .reveal-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(6, 214, 160, 0.4);
+    box-shadow: 0 6px 20px rgba(6, 103, 214, 0.4);
   }
   
   .player-username {

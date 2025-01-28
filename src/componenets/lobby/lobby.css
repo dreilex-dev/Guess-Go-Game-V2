@@ -2,15 +2,14 @@
 
 .chat-button {
     display: inline-block;
-    padding: 15px 30px;
-    font-family: var(--font-display);
+    padding: 15px 30px; 
     font-size: var(--text-xl);
     font-weight: var(--font-bold);
-    color: #f8ffe5; 
-    background: linear-gradient(45deg, #06d6a0, #1b9aaa); 
+    color: #ffffff; 
+    background: linear-gradient(45deg,  #57DFF2, #004D74); 
     border: none;
     border-radius: 50px;
-    box-shadow: 0 0 15px rgba(6, 214, 160, 0.5), 0 0 30px rgba(27, 153, 170, 0.5);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     text-transform: uppercase;
@@ -18,15 +17,13 @@
 }
 
 .chat-button:hover {
-    transform: scale(1.1);
-    background: linear-gradient(45deg, #1b9aaa, #b8001f); 
-    box-shadow: 0 0 25px rgba(27, 153, 170, 0.8), 0 0 50px rgba(184, 0, 31, 0.8);
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, #8afbff, #ffffff); 
+    color: #00647A;
 }
 
 .chat-button:active {
-    transform: scale(1);
-    background: linear-gradient(45deg, #b8001f, #06d6a0); 
-    box-shadow: 0 0 10px rgba(184, 0, 31, 0.6), 0 0 20px rgba(6, 214, 160, 0.6);
+    background: linear-gradient(45deg, #8afbff, #ffffff); 
 }
 
 .chat-button-glow {
@@ -92,6 +89,7 @@
 .lobby-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     font-family: var(--font-display);
 }
@@ -104,7 +102,6 @@
 }
 
 .leave-button-container {
-    margin-left: auto;
     display: flex;
     align-items: center;
 }
@@ -143,6 +140,11 @@
 }
 
 .players-swiper {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1.5px solid #ffffff;
     width: 100%;
     height: 100%;
     padding: 20px;
@@ -254,11 +256,11 @@
 }
 
 .swiper-button-prev {
-    left: 0;
+    left: 5px;
 }
 
 .swiper-button-next {
-    right: 0;
+    right: 5px;
 }
 
 .swiper-button-next:after,
@@ -291,25 +293,17 @@
 }
 
 /* Timer */
-.timer {
-    font-family: var(--font-primary);
+/* .timer {
     font-size: var(--text-xl);
-}
+} */
 
-/* Navigation și Buttons */
-.leave-button-container button,
-.chat-button-container button {
-    font-family: var(--font-primary);
-    font-size: var(--text-base);
-    font-weight: var(--font-medium);
-}
 
 /* Swiper navigation și pagination */
-.swiper-pagination,
+/* .swiper-pagination,
 .swiper-button-next,
 .swiper-button-prev {
     font-family: var(--font-secondary);
-}
+} */
 
 /* Labels și text secundar */
 .section-label,

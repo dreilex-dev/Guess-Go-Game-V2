@@ -1,6 +1,8 @@
 .chatList {
+ 
   flex: 1;
   overflow: scroll;
+  border-right: 1px solid #ffffff;
 
   &::-webkit-scrollbar {
     width: 0;
@@ -15,10 +17,11 @@
     align-items: center;
     gap: 20px;
     padding: 20px;
+    
 
     .searchBar {
       flex: 1;
-      background-color: rgba(17, 25, 40, 0.5);
+      background-color: rgba(255, 255, 255, 0.6);
       display: flex;
       align-items: center;
       gap: 20px;
@@ -29,7 +32,7 @@
         background-color: transparent;
         border: none;
         outline: none;
-        color: white;
+        color: #00647A;
         flex: 1;
       }
 
@@ -42,7 +45,7 @@
     .add {
       width: 40px;
       height: 40px;
-      background-color: rgba(17, 25, 40, 0.5);
+      background-color: rgba(255, 255, 255, 0.6);
       padding: 10px;
       border-radius: 10px;
       cursor: pointer;
@@ -55,7 +58,6 @@
     gap: 20px;
     padding: 20px;
     cursor: pointer;
-    border-bottom: 1px solid #dddddd35;
 
     img {
       width: 50px;
@@ -84,5 +86,6 @@
     cursor: pointer;
     width: 30px;
     height: 30px;
+    
   }
 }

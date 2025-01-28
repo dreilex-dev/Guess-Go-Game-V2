@@ -1,7 +1,7 @@
 @import '../typography.css';
 
 .timer {
-  padding: 10px 20px;
+  padding: 13px 20px;
   border-radius: 8px;
   font-family: var(--font-display);
   font-size: var(--text-xl);
@@ -14,11 +14,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  text-transform: uppercase;
 }
 
 /* Peste 50% timp rămas */
 .timer-safe {
-  background-color: #06d6a0;
+  background-color: #00647A;
   border: 1px solid rgba(27, 154, 170, 0.3);
 }
 
@@ -49,11 +50,11 @@
     box-shadow: 0 4px 6px rgba(184, 0, 31, 0.2);
   }
 }
-
+/* 
 .timer:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
+} */
 
 /* Adăugăm stilul pentru când timpul s-a terminat */
 .timer-ended {

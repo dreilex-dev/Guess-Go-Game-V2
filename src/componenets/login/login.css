@@ -67,7 +67,8 @@ h2 {
           width: 100%;
           padding: 20px;
           border: none;
-          background-color: #006371;
+          background: linear-gradient(45deg,  #57DFF2, #004D74); 
+          box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
           color: #ffffff;
           border-radius: 10px;
           cursor: pointer;
@@ -77,8 +78,9 @@ h2 {
           margin-top: 10px;
 
           &:hover {
-            background-color: #ffffff;
-            color: #006371;
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #8afbff, #ffffff); 
+            color: #00647A;
         }
   
           &:disabled {
