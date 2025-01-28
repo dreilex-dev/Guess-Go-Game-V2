@@ -13,6 +13,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Timer from "./Timer";
 import RevealedPlayerCard from "./RevealedPlayerCard";
+import LogOutButton from "../LogOutButton";
 
 const Lobby = () => {
   const navigate = useNavigate();
@@ -75,18 +76,6 @@ const Lobby = () => {
     return () => window.removeEventListener('showRealNames', handleTimeUp);
   }, []);
 
-  const handleChat = (player) => {
-    navigate('/chat_room');
-  };
-
-  const handleReveal = (player) => {
-    console.log(`Revealing information for player ID: ${player.id}`);
-  };
-
-  const handleLeave = () => {
-    console.log("Leave button clicked!");
-  };
-
   const handleChatClick = () => {
     navigate('/chat_room');
   };
@@ -99,7 +88,7 @@ const Lobby = () => {
         <div className="lobby-code-container">
           <Timer players={players} />
         </div>
-        <div className="leave-button-container">
+        <div className="leave-button-container ">
 
           {isTimeUp ? (
             <button
@@ -112,7 +101,7 @@ const Lobby = () => {
               Play Again
             </button>
           ) : (
-            <LeaveButton onLeave={handleLeave} />
+            <LogOutButton/>
           )}
         </div>
       </div>

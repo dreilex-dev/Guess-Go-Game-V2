@@ -18,18 +18,16 @@ const Timer = ({ players }) => {
     const unsubscribe = onSnapshot(lobbyRef, async (docSnapshot) => {
       if (docSnapshot.exists()) {
         const data = docSnapshot.data();
-        console.log("Timer data:", data);
 
         // Verificăm dacă jocul este în starea "ready"
         if (data.gameState === "ready") {
           // Inițializăm timer-ul dacă nu există
           if (!data.timerStart || !data.timerDuration) {
             const calculatedTime = players.length * 2 * 60;
-            console.log("Initializing timer with:", calculatedTime);
             
             try {
               await updateDoc(lobbyRef, {
-                timerStart: Date.now(),
+                timerStart: Date.now(), 
                 timerDuration: calculatedTime
               });
             } catch (error) {

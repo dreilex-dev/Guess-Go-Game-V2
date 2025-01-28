@@ -187,6 +187,15 @@
       }
     }
 
+    .btn-tertiary {
+      background-color: #F8FFE5; 
+      color: rgb(90, 89, 89);;
+    
+      &:hover {
+        background-color: #edebeb; 
+      }
+    }
+
     .logOutBtn {
       background-color: #f8ffe5;
       color: rgb(90, 89, 89);

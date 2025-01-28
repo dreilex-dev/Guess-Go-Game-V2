@@ -25,7 +25,6 @@ const GameLobby = () => {
       localStorage.setItem(`modalShown_${currentUser.id}`, "true");
     }
   };
-  console.log(localStorage.getItem("modalShown"));
   return (
     <>
       <div className="game-lobby-container">
