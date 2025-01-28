@@ -4,8 +4,8 @@ import { db } from "../../lib/firebase";
 import "./revealedPlayerCard.css";
 
 const RevealedPlayerCard = ({ player, rank }) => {
+  const points = player.points || 0;  // Luăm points direct din obiectul player
   const [playingAs, setPlayingAs] = useState("");
-  const [points, setPoints] = useState(0);
 
   const getRankStyle = (rank) => {
     switch (rank) {
@@ -73,7 +73,9 @@ const RevealedPlayerCard = ({ player, rank }) => {
       <div 
         className={`handle ${rankStyle.className || ''}`}
         style={{ 
-          ...rankStyle,
+          border: rankStyle.border,
+          borderTop: "none",
+          boxShadow: rankStyle.boxShadow,
           color: "#FFFFFF",
           background: "transparent"
         }}
