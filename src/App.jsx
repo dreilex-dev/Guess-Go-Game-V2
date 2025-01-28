@@ -17,6 +17,9 @@ import {
 } from "react-router-dom";
 import GameLobby from "./componenets/GameLobby";
 import React from "react";
+import Home from "./componenets/home/Home";
+import { ScoreProvider } from './context/ScoreContext';
+import Loader from "./componenets/loader/Loader";
 
 const App = () => {
   const {
@@ -36,6 +39,8 @@ const App = () => {
   const [timerDuration, setTimerDuration] = useState(null);
   const [timerStart, setTimerStart] = useState(null);
   const [showRedBorder, setShowRedBorder] = useState(false);
+
+  const [showLoader, setShowLoader] = React.useState(true);
 
   useEffect(() => {
     if (!currentUser) {
@@ -95,47 +100,54 @@ const App = () => {
 
   console.log(gameState);
 
+  const handleLoadingComplete = () => {
+    setShowLoader(false);
+  };
+
   if (isLoading) return <div className="loading">Loading..</div>;
+  
   return (
-    <Router>
-      <div
-        className={`container relative ${
-          showRedBorder ? "overflow-hidden" : ""
-        }`}
-      >
-        {showRedBorder && <div className="absolute border-walker"></div>}
-        <Routes>
-          {!currentUser && <Route path="*" element={<Login />} />}
-          {currentUser && gameState !== "ready" && (
-            <Route path="*" element={<AddUser />} />
-          )}
-          {currentUser && gameState === "ready" && (
-            <>
-              <Route path="/" element={<GameLobby />} />{" "}
-              <Route
-                path="/chat_room"
-                element={
-                  isTimeUp ? (
-                    <Navigate to="/" replace />
-                  ) : (
-                    <>
-                      <List />
-                      {chatId && (
-                        <>
-                          <Chat />
-                          <Details />
-                        </>
-                      )}
-                    </>
-                  )
-                }
+    <ScoreProvider>
+      <Router>
+        {showLoader && <Loader onLoadingComplete={handleLoadingComplete} />}
+          <Routes>
+            <Route path="/" element={<Home showLoader={showLoader} setShowLoader={setShowLoader} />} />
+            {!currentUser && (
+              <Route 
+                path="/game/*" 
+                element={<Login setShowLoader={setShowLoader} />} 
               />
-            </>
-          )}
-        </Routes>
-      </div>
-      <Notification />
-    </Router>
+            )}
+            {currentUser && (
+              <>
+                {gameState !== "ready" && (
+                  <Route path="/lobby" element={<AddUser />} />
+                )}
+                {gameState === "ready" && (
+                  <>
+                    <Route path="/game" element={<GameLobby />} />
+                    <Route
+                      path="/chat_room"
+                      element={
+                        <>
+                          <List />
+                          {chatId && (
+                            <>
+                              <Chat />
+                              <Details />
+                            </>
+                          )}
+                        </>
+                      }
+                    />
+                  </>
+                )}
+              </>
+            )}
+          </Routes>
+        <Notification />
+      </Router>
+    </ScoreProvider>
   );
 };
 

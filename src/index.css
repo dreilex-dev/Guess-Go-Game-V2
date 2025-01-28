@@ -94,7 +94,8 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  color: white;
+  width: 100vw;
+  color: #209AAB;
 }
 
 .container {
