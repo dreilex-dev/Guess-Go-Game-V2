@@ -125,6 +125,8 @@ const Chat = () => {
     return null;
   };
 
+  console.log(userPlayingData);
+
   return (
     <div className="chat">
       <div className="top">
@@ -135,7 +137,7 @@ const Chat = () => {
           />
           <div className="texts">
             <span>
-              {userPlayingData ? userPlayingData.playingAs : "Loading..."}
+              {userPlayingData ? userPlayingData.username : "Loading..."}
             </span>
             <p>Guess who am I ! </p>
           </div>

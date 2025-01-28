@@ -1,8 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import {getAuth} from 'firebase/auth';
-import {getFirestore} from 'firebase/firestore';
+ import {getFirestore} from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -10,18 +9,17 @@ import {getFirestore} from 'firebase/firestore';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCnZtdfLsPe0c201h6jxpMj1tIxgQvuT6Q",
-  authDomain: "guessandgochat.firebaseapp.com",
-  projectId: "guessandgochat",
-  storageBucket: "guessandgochat.firebasestorage.app",
-  messagingSenderId: "882826771963",
-  appId: "1:882826771963:web:45df61ecdabc8c99145f5e",
-  measurementId: "G-T25G1XLYLV"
+  apiKey: "AIzaSyCdCwOkUKx4eVdC-t8elK8iHYTqTqPOkxM",
+  authDomain: "guessandgoversiontwo.firebaseapp.com",
+  projectId: "guessandgoversiontwo",
+  storageBucket: "guessandgoversiontwo.firebasestorage.app",
+  messagingSenderId: "827933428607",
+  appId: "1:827933428607:web:25a0cb05de905e9b14e84a",
+  measurementId: "G-XZN76DCT1N"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-export const auth =getAuth(app);
 export const db= getFirestore(app)

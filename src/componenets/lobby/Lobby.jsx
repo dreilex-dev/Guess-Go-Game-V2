@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useUserStore } from "../../lib/userStore";
-import GameCode from "./GameCode";
 import PlayerCard from "./PlayerCard";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../lib/firebase";
 import LeaveButton from "./LeaveButton";
 import ChatButton from "./ChatButton";
 import { useNavigate } from 'react-router-dom';
-// Swiper imports
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
@@ -70,6 +68,7 @@ const Lobby = () => {
   useEffect(() => {
     const handleTimeUp = () => {
       setIsTimeUp(true);
+      
     };
     
     window.addEventListener('showRealNames', handleTimeUp);
@@ -101,7 +100,20 @@ const Lobby = () => {
           <Timer players={players} />
         </div>
         <div className="leave-button-container">
-          <LeaveButton onLeave={handleLeave} />
+
+          {isTimeUp ? (
+            <button
+              className="leave-button"
+              onClick={() => {
+                const resetUser = useUserStore.getState().resetUser;
+                resetUser(); 
+              }}
+            >
+              Play Again
+            </button>
+          ) : (
+            <LeaveButton onLeave={handleLeave} />
+          )}
         </div>
       </div>
 
