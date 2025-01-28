@@ -1,21 +1,29 @@
 export const calculateRanks = (players) => {
-    const sortedPlayers = [...players].sort((a, b) => (b.points || 0) - (a.points || 0));
-  
-    const ranks = [];
-    let currentRank = 1;
-  
-    for (let i = 0; i < sortedPlayers.length; i++) {
-      if (i > 0 && sortedPlayers[i].points === sortedPlayers[i - 1].points) {
-        ranks.push(currentRank);
-      } else {
-        currentRank = i + 1;
-        ranks.push(currentRank);
-      }
-    }
-  
-    return sortedPlayers.map((player, index) => ({
+  // check if all players have 0 points
+  const allZeroPoints = players.every((player) => (player.points || 0) === 0);
+
+  if (allZeroPoints) {
+    return players.map((player) => ({
       ...player,
-      rank: ranks[index],
+      rank: null, 
     }));
-  };
-  
+  }
+  // sort players by points
+  const sortedPlayers = [...players].sort((a, b) => (b.points || 0) - (a.points || 0));
+
+  let currentRank = 1;
+  let previousPoints = null;
+  // calculate ranks
+  return sortedPlayers.map((player, index) => {
+    if (player.points !== previousPoints) {
+      currentRank = index + 1;
+    }
+
+    previousPoints = player.points;
+
+    return {
+      ...player,
+      rank: currentRank,
+    };
+  });
+};

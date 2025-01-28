@@ -252,4 +252,5 @@
   .winner-handle {
     animation: pulse-border 1.5s infinite;
     border-width: 2px !important;
+    border-top: none !important;
   }

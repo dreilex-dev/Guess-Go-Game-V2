@@ -12,26 +12,26 @@ const RevealedPlayerCard = ({ player, rank }) => {
       case 1:
         return { 
           border: "2px solid #FFD700", 
-          boxShadow: "0 0 10px rgba(255, 215, 0, 0.5)", 
+          boxShadow: "0 0 5px rgba(255, 215, 0, 0.5)", 
           text: "Winner",
           className: "winner-handle"
         };
       case 2:
         return { 
           border: "1px solid #C0C0C0", 
-          boxShadow: "0 0 10px rgba(192, 192, 192, 0.5)", 
+          boxShadow: "0 0 5px rgba(192, 192, 192, 0.5)", 
           text: "2nd Place"
         };
       case 3:
         return { 
           border: "1px solid #CD7F32", 
-          boxShadow: "0 0 10px rgba(205, 127, 50, 0.5)", 
+          boxShadow: "0 0 5px rgba(205, 127, 50, 0.5)", 
           text: "3rd Place"
         };
       default:
         return { 
           border: "1px solid rgba(255, 255, 255, 0.5)", 
-          boxShadow: "none", 
+          boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)",
           text: "" 
         };
     }
