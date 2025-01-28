@@ -1,29 +1,28 @@
 export const calculateRanks = (players) => {
-  // check if all players have 0 points
-  const allZeroPoints = players.every((player) => (player.points || 0) === 0);
-
-  if (allZeroPoints) {
-    return players.map((player) => ({
-      ...player,
-      rank: null, 
-    }));
-  }
-  // sort players by points
+  // Sort players by points
   const sortedPlayers = [...players].sort((a, b) => (b.points || 0) - (a.points || 0));
 
-  let currentRank = 1;
-  let previousPoints = null;
-  // calculate ranks
-  return sortedPlayers.map((player, index) => {
+  // Apply correct ranks
+  let rank = 1; // Current rank
+  let previousPoints = null; // Last seen points
+  let skipRank = 0; // Skip for next rank
+
+  const rankedPlayers = sortedPlayers.map((player, index) => {
     if (player.points !== previousPoints) {
-      currentRank = index + 1;
+      // Update rank only if current points differ from previous
+      rank = index + 1 - skipRank; // Adjust rank for previous skips
+    } else {
+      // If points are the same, skip rank increment
+      skipRank++;
     }
 
     previousPoints = player.points;
 
     return {
       ...player,
-      rank: currentRank,
+      rank,
     };
   });
+
+  return rankedPlayers;
 };
