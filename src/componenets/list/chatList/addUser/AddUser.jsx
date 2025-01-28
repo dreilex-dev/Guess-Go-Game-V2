@@ -272,7 +272,7 @@ const AddUser = () => {
             }}
             title="Click to copy game code"
           >
-            <span>Game Code: {currentUser.game_code}</span>
+            <span>Code: {currentUser.game_code}</span>
           </div>
         )}
 

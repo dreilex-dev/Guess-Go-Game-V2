@@ -40,7 +40,7 @@ const App = () => {
   const [timerStart, setTimerStart] = useState(null);
   const [showRedBorder, setShowRedBorder] = useState(false);
 
-  const [showLoader, setShowLoader] = React.useState(true);
+  const [showLoader, setShowLoader] = useState(false);
 
   useEffect(() => {
     if (!currentUser) {
@@ -111,37 +111,47 @@ const App = () => {
       <Router>
         {showLoader && <Loader onLoadingComplete={handleLoadingComplete} />}
           <Routes>
-            <Route path="/" element={<Home showLoader={showLoader} setShowLoader={setShowLoader} />} />
+            <Route 
+              path="/" 
+              element={
+                <Home 
+                  showLoader={showLoader} 
+                  setShowLoader={setShowLoader} 
+                />
+              } 
+            />
             {!currentUser && (
               <Route 
                 path="/game/*" 
                 element={<Login setShowLoader={setShowLoader} />} 
               />
             )}
-            {currentUser && (
+            {currentUser && gameState !== "ready" && (
+              <Route 
+                path="/game/*" 
+                element={<AddUser setShowLoader={setShowLoader} />} 
+              />
+            )}
+            {currentUser && gameState === "ready" && (
               <>
-                {gameState !== "ready" && (
-                  <Route path="/lobby" element={<AddUser />} />
-                )}
-                {gameState === "ready" && (
-                  <>
-                    <Route path="/game" element={<GameLobby />} />
-                    <Route
-                      path="/chat_room"
-                      element={
+                <Route 
+                  path="/game" 
+                  element={<GameLobby setShowLoader={setShowLoader} />} 
+                />
+                <Route
+                  path="/chat_room"
+                  element={
+                    <>
+                      <List setShowLoader={setShowLoader} />
+                      {chatId && (
                         <>
-                          <List />
-                          {chatId && (
-                            <>
-                              <Chat />
-                              <Details />
-                            </>
-                          )}
+                          <Chat />
+                          <Details />
                         </>
-                      }
-                    />
-                  </>
-                )}
+                      )}
+                    </>
+                  }
+                />
               </>
             )}
           </Routes>
