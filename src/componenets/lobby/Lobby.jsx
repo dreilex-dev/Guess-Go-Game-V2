@@ -5,22 +5,25 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../lib/firebase";
 import LeaveButton from "./LeaveButton";
 import ChatButton from "./ChatButton";
-import { useNavigate } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import Timer from "./Timer";
 import RevealedPlayerCard from "./RevealedPlayerCard";
+
+import { calculateRanks } from "../utils/calculateRanks";
+
 import LogOutButton from "../LogOutButton";
+
 
 const Lobby = () => {
   const navigate = useNavigate();
   const [players, setPlayers] = useState([]);
   const currentUser = useUserStore((state) => state.currentUser);
   const lobbyCode = currentUser?.game_code || "No Lobby Code";
-  const [showRealNames, setShowRealNames] = useState(false);
   const [isTimeUp, setIsTimeUp] = useState(false);
 
   useEffect(() => {
@@ -47,7 +50,7 @@ const Lobby = () => {
                   const playingUserData = playingUserSnap.data();
                   fetchedPlayers.push({
                     ...playerData,
-                    playingAs: playingUserData.username
+                    playingAs: playingUserData.username,
                   });
                 }
               }
@@ -69,18 +72,22 @@ const Lobby = () => {
   useEffect(() => {
     const handleTimeUp = () => {
       setIsTimeUp(true);
-      
     };
-    
-    window.addEventListener('showRealNames', handleTimeUp);
-    return () => window.removeEventListener('showRealNames', handleTimeUp);
+
+    window.addEventListener("showRealNames", handleTimeUp);
+    return () => window.removeEventListener("showRealNames", handleTimeUp);
   }, []);
 
   const handleChatClick = () => {
-    navigate('/chat_room');
+    navigate("/chat_room");
   };
 
-  const sortedPlayers = players.sort((a, b) => (b.points || 0) - (a.points || 0));
+  const handleLeave = () => {
+    console.log("Leave button clicked!");
+  };
+
+  // calculate ranks
+const playersWithRanks = players.length > 0 ? calculateRanks(players) : [];
 
   return (
     <div className="lobby-container">
@@ -88,14 +95,14 @@ const Lobby = () => {
         <div className="lobby-code-container">
           <Timer players={players} />
         </div>
-        <div className="leave-button-container ">
 
+        <div className="leave-button-container">
           {isTimeUp ? (
             <button
               className="leave-button"
               onClick={() => {
                 const resetUser = useUserStore.getState().resetUser;
-                resetUser(); 
+                resetUser();
               }}
             >
               Play Again
@@ -125,21 +132,16 @@ const Lobby = () => {
             769: {
               slidesPerView: 3,
               spaceBetween: 30,
-            }
+            },
           }}
           className="players-swiper"
         >
-          {sortedPlayers.map((player, index) => (
+          {playersWithRanks.map((player) => (
             <SwiperSlide key={player.id}>
               {isTimeUp ? (
-                <RevealedPlayerCard 
-                  player={player} 
-                  rank={index + 1} 
-                />
+                <RevealedPlayerCard player={player} rank={player.rank} />
               ) : (
-                <PlayerCard 
-                  player={player}
-                />
+                <PlayerCard player={player} />
               )}
             </SwiperSlide>
           ))}
