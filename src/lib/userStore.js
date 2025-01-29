@@ -61,7 +61,6 @@ export const useUserStore = create((set, get) => ({
 
     addGuess: async (userId, guessedUsername) => {
       try {
-        console.log(userId,guessedUsername)
         const state = get();
         const currentUser = state.currentUser;
     
@@ -91,6 +90,7 @@ export const useUserStore = create((set, get) => ({
     
         const updatedData = {
           guessedUsers: [...guessedUsers, userId],
+          lastGuessTakenTime: Date.now(),
           ...(isCorrectGuess && { points: (currentUser.points || 0) + 1 }),
         };
     

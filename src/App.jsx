@@ -12,7 +12,6 @@ import { db } from "./lib/firebase";
 import { BrowserRouter as Router, Route, Routes ,Navigate  } from "react-router-dom";
 import GameLobby from "./componenets/GameLobby";
 import React from "react";
-import { ScoreProvider } from './context/ScoreContext';
 
 const App = () => {
   const {
