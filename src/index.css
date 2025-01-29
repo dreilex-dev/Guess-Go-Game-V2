@@ -1,3 +1,82 @@
+.container {
+  position: relative;
+  width: 80vw;
+  max-height: 90vh;
+  background-color: rgba(17, 25, 40, 0.75);
+  backdrop-filter: blur(19px) saturate(180%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.border-walker {
+  position: absolute;
+  background-color: red;
+  animation: walk-around 3s linear infinite;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 1), 0 0 30px rgba(255, 0, 0, 0.8);
+  z-index: 9999;
+}
+
+@keyframes walk-around {
+  0% {
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 5px;
+  }
+  25% {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+  }
+  30% {
+    top: 0;
+    left: 100%;
+    width: 5px;
+    height: 5px;
+    transform: translateX(-100%);
+  }
+  50% {
+    top: 0;
+    left: 100%;
+    width: 5px;
+    height: 100%;
+    transform: translateX(-100%);
+  }
+  55% {
+    top: 100%;
+    left: 100%;
+    width: 5px;
+    height: 5px;
+    transform: translate(-100%, -100%);
+  }
+  75% {
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    transform: translateY(-100%);
+  }
+  80% {
+    top: 100%;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    transform: translateY(-100%);
+  }
+  100% {
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -19,6 +98,7 @@ body {
 }
 
 .container {
+  position: relative;
   width: 80vw;
   max-height: 90vh;
   background-color: rgba(17, 25, 40, 0.75);
