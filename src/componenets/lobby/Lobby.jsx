@@ -13,7 +13,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Timer from "./Timer";
 import RevealedPlayerCard from "./RevealedPlayerCard";
+
 import { calculateRanks } from "../utils/calculateRanks";
+
+import LogOutButton from "../LogOutButton";
+
 
 const Lobby = () => {
   const navigate = useNavigate();
@@ -82,8 +86,8 @@ const Lobby = () => {
     console.log("Leave button clicked!");
   };
 
-  // Calculăm rangurile
-  const playersWithRanks = calculateRanks(players);
+  // calculate ranks
+const playersWithRanks = players.length > 0 ? calculateRanks(players) : [];
 
   return (
     <div className="lobby-container">
@@ -91,6 +95,7 @@ const Lobby = () => {
         <div className="lobby-code-container">
           <Timer players={players} />
         </div>
+
         <div className="leave-button-container">
           {isTimeUp ? (
             <button
@@ -103,7 +108,7 @@ const Lobby = () => {
               Play Again
             </button>
           ) : (
-            <LeaveButton onLeave={handleLeave} />
+            <LogOutButton/>
           )}
         </div>
       </div>

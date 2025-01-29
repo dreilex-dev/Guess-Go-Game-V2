@@ -3,13 +3,13 @@ import List from "./componenets/list/List";
 import Chat from "./componenets/chat/Chat";
 import Login from "./componenets/login/Login";
 import Notification from "./componenets/notification/Notification";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useUserStore } from "./lib/userStore";
 import { useChatStore } from "./lib/chatStore";
 import AddUser from "./componenets/list/chatList/addUser/AddUser";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "./lib/firebase";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes ,Navigate  } from "react-router-dom";
 import GameLobby from "./componenets/GameLobby";
 import React from "react";
 import { ScoreProvider } from './context/ScoreContext';
@@ -28,6 +28,9 @@ const App = () => {
   } = useUserStore();
 
   const { chatId } = useChatStore();
+  const [isTimeUp, setIsTimeUp] = useState(false);
+  const [timerDuration, setTimerDuration] = useState(null); 
+  const [timerStart, setTimerStart] = useState(null);
 
   useEffect(() => {
     if (!currentUser) {
@@ -41,6 +44,12 @@ const App = () => {
       const unsubscribe = onSnapshot(gameLobbyDocRef, (gameLobbyDoc) => {
         if (gameLobbyDoc.exists()) {
           const lobbyData = gameLobbyDoc.data();
+
+          if (lobbyData.timerDuration && lobbyData.timerStart) {
+            setTimerDuration(lobbyData.timerDuration);
+            setTimerStart(lobbyData.timerStart);
+          }
+
           if (lobbyData.gameState === "ready") {
             setGameState("ready");
           }
@@ -51,9 +60,28 @@ const App = () => {
     }
   }, [currentUser, currentUser?.game_code, setGameState]);
 
+  useEffect(() => {
+    if (timerDuration && timerStart) {
+      const updateTimer = () => {
+        const elapsedTime = Math.floor((Date.now() - timerStart) / 1000); 
+        const timeLeft = Math.max(0, timerDuration - elapsedTime); 
+  
+        if (timeLeft === 0) {
+          setIsTimeUp(true);
+          clearInterval(interval); 
+        }
+      };
+  
+      const interval = setInterval(updateTimer, 1000);
+      updateTimer(); 
+  
+      return () => clearInterval(interval); 
+    }
+  }, [timerDuration, timerStart]);
+
   if (isLoading) return <div className="loading">Loading..</div>;
   return (
-    <ScoreProvider>
+
       <Router>
         <div className="container">
           <Routes>
@@ -67,15 +95,19 @@ const App = () => {
                 <Route
                   path="/chat_room"
                   element={
-                    <>
-                      <List />
-                      {chatId && (
-                        <>
-                          <Chat />
-                          <Details />
-                        </>
-                      )}
-                    </>
+                    isTimeUp ? ( 
+                      <Navigate to="/" replace />
+                    ) : (
+                      <>
+                        <List />
+                        {chatId && (
+                          <>
+                            <Chat />
+                            <Details />
+                          </>
+                        )}
+                      </>
+                    )
                   }
                 />
               </>
@@ -84,7 +116,7 @@ const App = () => {
         </div>
         <Notification />
       </Router>
-    </ScoreProvider>
+
   );
 };
 

@@ -55,7 +55,7 @@ const RevealedPlayerCard = ({ player, rank }) => {
     fetchPlayerData();
   }, [player.is_playing]);
 
-  const rankStyle = getRankStyle(rank);
+  const rankStyle = points > 0 ? getRankStyle(rank) : { border: "none", boxShadow: "none", text: "" };
 
   return (
     <div className="player-card-container">

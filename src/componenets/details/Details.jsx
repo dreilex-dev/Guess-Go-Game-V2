@@ -185,7 +185,7 @@ const Details = () => {
             <span>Did you figure out who this is?</span>
           </div>
         </div>
-        <button className="btn btn-primary" onClick={handleGuess}>
+        <button className="btn btn-tertiary" onClick={handleGuess}>
           Click here then
         </button>
         <button onClick={handleGoBack} className="btn btn-secondary">
