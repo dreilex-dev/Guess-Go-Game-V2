@@ -78,6 +78,7 @@ const App = () => {
         }
         if (timeLeft === 0) {
           setIsTimeUp(true);
+          setShowRedBorder(false);
           clearInterval(interval);
         }
       };
