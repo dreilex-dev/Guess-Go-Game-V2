@@ -21,10 +21,9 @@ const AddUser = () => {
         ...style,
       }}
       onClick={onClick}
-    >
-    </div>
+    ></div>
   );
-  
+
   const CustomNextArrow = ({ className, style, onClick }) => (
     <div
       className={className}
@@ -32,18 +31,17 @@ const AddUser = () => {
         ...style,
       }}
       onClick={onClick}
-    >
-    </div>
+    ></div>
   );
 
   const sliderSettings = {
-    arrows: true, 
+    arrows: true,
     infinite: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    prevArrow: <CustomPrevArrow />, 
-    nextArrow: <CustomNextArrow />, 
+    prevArrow: <CustomPrevArrow />,
+    nextArrow: <CustomNextArrow />,
     responsive: [
       {
         breakpoint: 1024,
@@ -69,13 +67,11 @@ const AddUser = () => {
       },
     ],
   };
-  
+
   const handleCopyGameCode = () => {
     navigator.clipboard.writeText(currentUser.game_code);
     toast.success("Game code copied to clipboard!");
-  }
-
-  
+  };
 
   useEffect(() => {
     if (!currentUser.game_code || !currentUser) {
@@ -142,7 +138,7 @@ const AddUser = () => {
   useEffect(() => {
     if (users.length > 0) {
       const allUsersValid = users.every(
-        (user) => user.is_playing && user.is_playing !== ""
+        (user) => user.is_playing && user.is_playing === ""
       );
       if (!allUsersValid) {
         console.error("Not all users have a valid 'is_playing' property.");
@@ -240,50 +236,49 @@ const AddUser = () => {
 
   return (
     <div className="addUser">
-  {loading ? (
-    <p>Loading players...</p>
-  ) : (
-    <>
-      {users.length > 0 ? (
-        <div className="usersSlider">
-          <Slider {...sliderSettings}>
-            {users.map((user, index) => (
-              <div key={index} className="user">
-                <div className="detail">
-                  <img
-                    src={user.avatar || "./avatar.png"}
-                    alt={user.username || "user"}
-                  />
-                  <span>{user.username}</span>
-                </div>
-              </div>
-            ))}
-          </Slider>
-        </div>
+      {loading ? (
+        <p>Loading players...</p>
       ) : (
-        <p>No player in this game lobby yet.</p>
+        <>
+          {users.length > 0 ? (
+            <div className="usersSlider">
+              <Slider {...sliderSettings}>
+                {users.map((user, index) => (
+                  <div key={index} className="user">
+                    <div className="detail">
+                      <img
+                        src={user.avatar || "./avatar.png"}
+                        alt={user.username || "user"}
+                      />
+                      <span>{user.username}</span>
+                    </div>
+                  </div>
+                ))}
+              </Slider>
+            </div>
+          ) : (
+            <p>No player in this game lobby yet.</p>
+          )}
+        </>
       )}
-    </>
-  )}
 
-  <div className="controls">
-    {currentUser.game_code && (
-      <div 
-        className="game-code-label"
-        onClick={() => {
-          navigator.clipboard.writeText(currentUser.game_code);
-          toast.success("Game code copied!");
-        }}
-        title="Click to copy game code"
-      >
-        <span>Game Code: {currentUser.game_code}</span>
+      <div className="controls">
+        {currentUser.game_code && (
+          <div
+            className="game-code-label"
+            onClick={() => {
+              navigator.clipboard.writeText(currentUser.game_code);
+              toast.success("Game code copied!");
+            }}
+            title="Click to copy game code"
+          >
+            <span>Game Code: {currentUser.game_code}</span>
+          </div>
+        )}
+
+        <button onClick={handlePlayersReady}>All Players Are Ready?</button>
       </div>
-    )}
-
-    <button onClick={handlePlayersReady}>All Players Are Ready?</button>
-  </div>
-</div>
-
+    </div>
   );
 };
 
