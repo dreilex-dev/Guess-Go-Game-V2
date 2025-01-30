@@ -12,7 +12,7 @@ Guess & Go is an exciting multiplayer social deduction game where players intera
 - **Identity Swap**: Assume another player's identity to confuse others
 - **Points System**: Earn one point by guessing the correct identity
 - **Ranking System**: See the top players after Time is up
-- **Hint System**: You'll get no of hints based on the number of players (floor value of Players/2)
+- **Hint System**: You'll get number of hints based on the number of players (floor value of Players/2)
 - **Dynamic Game Timer**: The duration scales with the number of players (Players * 2 minutes)
 - **Multiple Game Rooms**: Create or join a game room
 
@@ -25,7 +25,7 @@ Guess & Go is an exciting multiplayer social deduction game where players intera
 
 2. **Game Rules**
    - **Identity Swap:**
-     - Each player is randomly assigned another player's chat identity
+     - Each player is randomly assigned another player's identity
      - You'll be chatting as someone else, adding to the mystery!
      - Try to mimic their chat style to avoid detection
 
@@ -70,6 +70,9 @@ Guess & Go is an exciting multiplayer social deduction game where players intera
 - 🔔 **React Toastify** - Toast Notifications  
 - 🎠 **Swiper.js** - Interactive Sliders  
 
+### 🎨 Design & Branding
+- 🎨 **Adobe Illustrator** - Logo & branding elements  
+
 ### ⚙️ Backend  
 - 🔥 **Firebase Firestore** - Realtime Database with `onSnapshot` updates  
 - 🛡️ **Security Rules** - Database Protection  
@@ -86,4 +89,14 @@ Guess & Go is an exciting multiplayer social deduction game where players intera
 - 🌀 **Git** - Version Control System  
 - 📦 **npm** - Package Manager  
 
+## 👥 Contributors
+
+A huge thank you to everyone who contributed to this project! 🎉
+
+| Name | GitHub Profile | Role |
+|------|--------------|------|
+| Andrei Boacă | [@dreilex](https://github.com/dreilex) | Project Lead & Full Stack Developer |
+| Silina Nassar | [@SilinaNassar](https://github.com/SilinaNassar) | Project Lead & Full Stack Developer |
+| Hanna  | [@mhanna-github](https://github.com/mhanna-github) | Frontend Developer |
+| Sary Nassar | Logo Designer |
 
