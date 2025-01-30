@@ -93,6 +93,8 @@ const App = () => {
     }
   }, [timerDuration, timerStart]);
 
+  console.log(gameState);
+
   if (isLoading) return <div className="loading">Loading..</div>;
   return (
     <Router>

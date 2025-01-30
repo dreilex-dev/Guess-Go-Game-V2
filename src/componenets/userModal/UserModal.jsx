@@ -5,7 +5,7 @@ import { db } from "../../lib/firebase";
 import "./userModal.css";
 
 const UserModal = ({ display, handleCloseModal }) => {
-  const { currentUser, setCurrentUser } = useUserStore();
+  const { currentUser, setCurrentUser, gameState } = useUserStore();
   const [userPlayingData, setUserPlayingData] = useState(null);
 
   useEffect(() => {
@@ -47,8 +47,9 @@ const UserModal = ({ display, handleCloseModal }) => {
 
     return unsubscribe;
   }, [currentUser?.is_playing]);
+
   if (!userPlayingData) {
-    return <div>Loading user info...</div>;
+    return <div></div>;
   }
   return (
     <>
