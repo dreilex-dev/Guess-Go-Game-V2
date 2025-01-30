@@ -3,12 +3,13 @@ import { toast } from "react-toastify";
 import { useUserStore } from "../lib/userStore";
 
 const LogOutButton = () => {
-  const { resetUser } = useUserStore();
+  const { resetUser, setGameState } = useUserStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleLogout = () => {
     try {
       resetUser();
+      setGameState("notReady");
       toast.success("Logged out successfully");
     } catch (error) {
       console.error("Error logging out:", error);

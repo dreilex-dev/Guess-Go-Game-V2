@@ -35,6 +35,7 @@ const Login = () => {
 
   const [usedAvatars, setUsedAvatars] = useState([]);
   const resetUser = useUserStore((state) => state.resetUser);
+  const { setGameState } = useUserStore();
 
   const getRandomAvatar = () => {
     const availableAvatars = avatars.filter(
@@ -67,6 +68,7 @@ const Login = () => {
   const handleJoinGame = async (e) => {
     e.preventDefault();
     await resetUser();
+    setGameState("notReady");
     setLoadingJoin(true);
     const formData = new FormData(e.target);
     const { username_join, game_code, hint_no1_join, hint_no2_join } =
@@ -226,6 +228,7 @@ const Login = () => {
   const handleCreateGame = async (e) => {
     e.preventDefault();
     await resetUser();
+    setGameState("notReady");
     setLoadingCreate(true);
 
     const formData = new FormData(e.target);

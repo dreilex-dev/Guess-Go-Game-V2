@@ -64,6 +64,9 @@ const App = () => {
       return () => unsubscribe();
     }
   }, [currentUser, currentUser?.game_code, setGameState]);
+  console.log(currentUser?.username);
+  console.log(currentUser?.game_code);
+  console.log(gameState);
 
   useEffect(() => {
     if (timerDuration && timerStart) {
