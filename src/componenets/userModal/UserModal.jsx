@@ -49,7 +49,7 @@ const UserModal = ({ display, handleCloseModal }) => {
   }, [currentUser?.is_playing]);
 
   if (!userPlayingData) {
-    return <div>Loading user info...</div>;
+    return <div></div>;
   }
   return (
     <>
