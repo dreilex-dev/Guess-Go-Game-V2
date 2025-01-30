@@ -11,6 +11,7 @@ const LogOutButton = () => {
       resetUser();
       setGameState("notReady");
       toast.success("Logged out successfully");
+      window.location.reload();
     } catch (error) {
       console.error("Error logging out:", error);
       toast.error("An error occurred while logging out.");
