@@ -4,7 +4,7 @@ import { db } from "../../lib/firebase";
 import "./revealedPlayerCard.css";
 
 const RevealedPlayerCard = ({ player, rank }) => {
-  const points = player.points || 0;
+  const points = player.adjustedPoints || player.points || 0; // Use adjustedPoints for the correct display
   const [playingAs, setPlayingAs] = useState("");
 
   const getRankStyle = (rank) => {
