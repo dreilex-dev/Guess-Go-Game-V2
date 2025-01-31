@@ -133,7 +133,7 @@ const Details = () => {
   };
 
   const handleGoBack = () => {
-    navigate("/");
+    navigate("/game");
   };
 
   const handleGuess = () => {
@@ -191,7 +191,6 @@ const Details = () => {
         <button onClick={handleGoBack} className="btn btn-secondary">
           Go back
         </button>
-        <LogOutButton />
       </div>
       {isModalOpen && (
         <GuessModal

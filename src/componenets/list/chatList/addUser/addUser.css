@@ -1,10 +1,12 @@
 .addUser {
   position: relative;
-  width: max-content;
-  min-width: 100vh;
-  height: max-content;
+  width: fit-content;
+  height: fit-content;
   padding: 30px;
-  background-color: rgba(17, 25, 40, 0.781);
+  background: rgba(25, 27, 48, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid #00647A;
   border-radius: 10px;
   position: absolute;
   top: 0;
@@ -16,7 +18,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 40px;
 
   form {
     display: flex;
@@ -69,20 +71,22 @@
   }
 
   button {
+    font-weight: 900;
+    letter-spacing: 0.8px;
     display: flex;
-    position: absolute;
-    right: 0;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #b8001f;
-    color: white;
+    padding:  15px;
+    border-radius: 10px; 
+    font-size: 16px;
+    text-transform: uppercase;
+    background-color: #ffffff;
+    color: #209AAB;
     border: none;
     cursor: pointer;
-    font-family: Arial, Helvetica, sans-serif;
   }
 
   button:hover {
-    background-color: #99021b;
+    background-color: #1b9902;
+    color: #ffffff;
   }
 
   .closeBtn {
@@ -105,40 +109,40 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .game-code-label {
-  position: absolute;
-  left: 0;
-  margin-right: 15px;
   background-color: #1B9AAA;
   color: #ffffff; 
-  padding: 10px 20px;
+  padding:  12px;
   border-radius: 10px; 
-  font-size: 16px;
-  font-family: Arial, Helvetica, sans-serif; 
+  font-weight: 900;
+    letter-spacing: 0.8px;
+  text-transform: uppercase;
   display: flex;
   align-items: center; 
   justify-content: center; 
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
   cursor: pointer;
   transition: all 0.3s ease;
   user-select: none;
+
+  &:hover {
+    background-color: #ffffff;
+    color: #209AAB;
+  } 
 }
 
-.game-code-label:hover {
-  opacity: 0.8;
-}
 
 .game-code-label:active {
   transform: scale(0.98);
 }
 
 .usersSlider {
-  width: 150vh;
+  width: 100vh;
   margin: 20px auto;
 }
+
 
 .user {
   max-width: 200px;
@@ -146,21 +150,22 @@
   justify-content: center;
   padding: 10px;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #209AAB;
   text-align: center;
 }
 
 .user img {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 10px;
 }
 
 .user span {
-  font-size: 16px;
-  color: white;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 900;
 }
 
 .slick-prev,

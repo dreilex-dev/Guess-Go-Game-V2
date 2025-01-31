@@ -93,7 +93,7 @@ const playersWithRanks = players.length > 0 ? calculateRanks(players) : [];
     <div className="lobby-container">
       <div className="lobby-header">
         <div className="lobby-code-container">
-          <Timer players={players} />
+          <Timer  className="border-walker" players={players} />
         </div>
 
         <div className="leave-button-container">
@@ -123,20 +123,21 @@ const playersWithRanks = players.length > 0 ? calculateRanks(players) : [];
           breakpoints={{
             320: {
               slidesPerView: 1,
-              spaceBetween: 20,
+              spaceBetween: 10,
             },
             481: {
               slidesPerView: 2,
-              spaceBetween: 25,
+              spaceBetween: 15,
             },
             769: {
               slidesPerView: 3,
-              spaceBetween: 30,
+              spaceBetween: 20,
             },
           }}
           className="players-swiper"
         >
           {playersWithRanks.map((player) => (
+            <div>
             <SwiperSlide key={player.id}>
               {isTimeUp ? (
                 <RevealedPlayerCard player={player} rank={player.rank} />
@@ -144,13 +145,14 @@ const playersWithRanks = players.length > 0 ? calculateRanks(players) : [];
                 <PlayerCard player={player} />
               )}
             </SwiperSlide>
+            </div>
           ))}
         </Swiper>
       </div>
 
       {!isTimeUp && (
         <div className="chat-button-container">
-          <ChatButton onChatClick={handleChatClick} />
+          <ChatButton  onChatClick={handleChatClick} />
         </div>
       )}
     </div>

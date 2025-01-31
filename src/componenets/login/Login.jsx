@@ -337,7 +337,7 @@ const Login = () => {
           <img
             src={avatarJoin || "./avatar.png"}
             alt="Avatar"
-            style={{ width: "100px", height: "100px" }}
+            style={{ width: "120px", height: "120px" }}
           />
           <input
             type="text"
@@ -381,7 +381,7 @@ const Login = () => {
           <img
             src={avatarCreate || "./avatar.png"}
             alt="Avatar"
-            style={{ width: "100px", height: "100px" }}
+            style={{ width: "120px", height: "120px" }}
           />
           <input
             type="text"
