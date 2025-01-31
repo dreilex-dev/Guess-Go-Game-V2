@@ -2,10 +2,10 @@
   flex: 1;
   width: 150px;
   height: 100%;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(94, 98, 141, 0.1);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border-left: 1px solid #ffffff;
+  border-left: 1px solid #ffffff80;
 
   .hints_box {
     flex-basis: 100%;
@@ -64,7 +64,7 @@
     align-items: center;
     gap: 15px;
     height: 340px;
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff80;
 
     img {
       width: 100px;
@@ -81,7 +81,7 @@
     flex-direction: column;
     gap: 25px;
     overflow-y: auto;
-    border: 1px solid #dddddd35;
+    border-bottom: 1px solid #ffffff80;
     background-color: transparent;
     scrollbar-width: thin;
     scrollbar-color: #cccccc transparent;
@@ -106,7 +106,7 @@
     .option {
       .title {
         font-size: 18px;
-        color: #00647A;
+        color: #ffffff;
         font-weight: 700;
         display: flex;
         align-items: center;

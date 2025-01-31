@@ -23,11 +23,8 @@ const LogOutButton = () => {
 
   return (
     <>
-      <button className="btn btn-primary leave-button-size" onClick={openModal}>
+      <button className="leave-button" onClick={openModal}>
         Leave the game
-      </button>
-      <button className="logOutBtn " onClick={openModal}>
-        Logout
       </button>
 
       {isModalOpen && (
@@ -74,7 +71,7 @@ const LogOutButton = () => {
                 }}
               >
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-secondary"
                   style={{
                     padding: "10px 20px",
                     color: "white",

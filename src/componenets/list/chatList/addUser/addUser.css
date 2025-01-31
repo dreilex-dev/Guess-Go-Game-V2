@@ -3,10 +3,10 @@
   width: fit-content;
   height: fit-content;
   padding: 30px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(25, 27, 48, 0.5);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 2px solid #ffffff;
+  border: 2px solid #00647A;
   border-radius: 10px;
   position: absolute;
   top: 0;
@@ -71,19 +71,22 @@
   }
 
   button {
+    font-weight: 900;
+    letter-spacing: 0.8px;
     display: flex;
     padding:  15px;
     border-radius: 10px; 
     font-size: 16px;
     text-transform: uppercase;
-    background-color: #b8001f;
-    color: white;
+    background-color: #ffffff;
+    color: #209AAB;
     border: none;
     cursor: pointer;
   }
 
   button:hover {
     background-color: #1b9902;
+    color: #ffffff;
   }
 
   .closeBtn {
@@ -114,8 +117,8 @@
   color: #ffffff; 
   padding:  12px;
   border-radius: 10px; 
-  font-size: 16px;
   font-weight: 900;
+    letter-spacing: 0.8px;
   text-transform: uppercase;
   display: flex;
   align-items: center; 
@@ -161,7 +164,7 @@
 
 .user span {
   font-size: 18px;
-  color: #00647A;
+  color: #ffffff;
   font-weight: 900;
 }
 

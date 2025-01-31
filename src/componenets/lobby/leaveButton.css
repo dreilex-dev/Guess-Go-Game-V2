@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: center; 
-    background: linear-gradient(45deg,  #57DFF2, #004D74); 
+    background: linear-gradient(45deg,  #209AAB, #004D74); 
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
     color: #fff;
     border: none;
@@ -25,14 +25,4 @@
     color: #00647A;
   }
 
-  .leave-button-size{
-    min-width: 160px;
-  }
 
-  @media (max-width: 768px) {
-    .leave-button-size{
-      width: 100%;
-      max-width: 320px;
-      margin: 0 auto;
-    }
-  }

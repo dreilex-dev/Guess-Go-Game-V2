@@ -58,7 +58,7 @@ h1 {
     border-radius: 15px;
     cursor: pointer;
     margin-top: 5vh;
-    background: linear-gradient(45deg,  #57DFF2, #004D74); 
+    background: linear-gradient(45deg,  #209AAB, #004D74); 
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
 
     &:hover {
@@ -113,7 +113,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 .modal-header h2 {
@@ -131,13 +131,14 @@ h1 {
 .modal-section h3 {
     font-size: 18px;
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
 }
 
 .modal-section ul {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 5px;
 }
 
 .modal-section li {
@@ -148,7 +149,7 @@ h1 {
 .modal-close {
     position: absolute;
     right: 0.5rem;
-    top: 0.5rem;
+    top: 0.1rem;
     text-transform: uppercase;
     font-weight: 600;
     font-size: 1.2rem;
@@ -159,6 +160,25 @@ h1 {
 
     &:hover {
         color: #57DFF2;
+    }
+}
+
+.modal-footer {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    a {
+        font-size: 16px;
+        text-decoration: none;
+        color: #00647A;
+        text-decoration: underline;
+
+
+        &:hover {
+            color: #57DFF2;
+        }
     }
 }
 
@@ -186,8 +206,7 @@ h1 {
     text-transform: uppercase;
     font-weight: 600;
     font-size: 1rem;
-    background: linear-gradient(45deg,  #57DFF2, #004D74); 
-    box-shadow: 0 6px 20px rgba(6, 103, 214, 0.4);
+    background: linear-gradient(45deg,  #209AAB, #004D74); 
     color: #ffffff;
     padding: 0.8rem 1rem;
     border-radius: 15px;

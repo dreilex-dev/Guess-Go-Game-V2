@@ -1,8 +1,7 @@
 .chatList {
- 
   flex: 1;
   overflow: scroll;
-  border-right: 1px solid #ffffff;
+  border-right: 1px solid #ffffff80;
 
   &::-webkit-scrollbar {
     width: 0;
@@ -21,7 +20,7 @@
 
     .searchBar {
       flex: 1;
-      background-color: rgba(255, 255, 255, 0.6);
+      background-color: rgba(188, 207, 223, 0.6);
       display: flex;
       align-items: center;
       gap: 20px;
@@ -32,7 +31,7 @@
         background-color: transparent;
         border: none;
         outline: none;
-        color: #00647A;
+        color: #ffffff;
         flex: 1;
       }
 
@@ -45,7 +44,7 @@
     .add {
       width: 40px;
       height: 40px;
-      background-color: rgba(255, 255, 255, 0.6);
+      background-color: rgba(188, 207, 223, 0.5);
       padding: 10px;
       border-radius: 10px;
       cursor: pointer;
@@ -53,6 +52,7 @@
   }
 
   .item {
+    color: #ffffff;
     display: flex;
     align-items: center;
     gap: 20px;

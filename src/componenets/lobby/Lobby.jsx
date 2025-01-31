@@ -152,7 +152,7 @@ const playersWithRanks = players.length > 0 ? calculateRanks(players) : [];
 
       {!isTimeUp && (
         <div className="chat-button-container">
-          <ChatButton onChatClick={handleChatClick} />
+          <ChatButton  onChatClick={handleChatClick} />
         </div>
       )}
     </div>
