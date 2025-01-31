@@ -18,7 +18,6 @@ import {
 import GameLobby from "./componenets/GameLobby";
 import React from "react";
 import Home from "./componenets/home/Home";
-import { ScoreProvider } from './context/ScoreContext';
 import Loader from "./componenets/loader/Loader";
 
 const App = () => {
@@ -107,7 +106,6 @@ const App = () => {
   if (isLoading) return <div className="loading">Loading..</div>;
   
   return (
-    <ScoreProvider>
       <Router>
         {showLoader && <Loader onLoadingComplete={handleLoadingComplete} />}
           <Routes>
@@ -157,7 +155,6 @@ const App = () => {
           </Routes>
         <Notification />
       </Router>
-    </ScoreProvider>
   );
 };
 
