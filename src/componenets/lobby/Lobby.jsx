@@ -22,23 +22,9 @@ import LogOutButton from "../LogOutButton";
 const Lobby = () => {
   const navigate = useNavigate();
   const [players, setPlayers] = useState([]);
-  const [playersWithRanks, setPlayersWithRanks] = useState([]);
   const currentUser = useUserStore((state) => state.currentUser);
   const lobbyCode = currentUser?.game_code || "No Lobby Code";
   const [isTimeUp, setIsTimeUp] = useState(false);
-
-  useEffect(() => {
-    const updateRanks = async () => {
-      if (players.length > 0) {
-        const ranks = await calculateRanks(players);
-        setPlayersWithRanks(ranks);
-      } else {
-        setPlayersWithRanks([]);
-      }
-    };
-
-    updateRanks();
-  }, [players]);
 
   useEffect(() => {
     const fetchPlayersFromLobby = async () => {
@@ -99,6 +85,9 @@ const Lobby = () => {
   const handleLeave = () => {
     console.log("Leave button clicked!");
   };
+
+  // calculate ranks
+const playersWithRanks = players.length > 0 ? calculateRanks(players) : [];
 
   return (
     <div className="lobby-container">

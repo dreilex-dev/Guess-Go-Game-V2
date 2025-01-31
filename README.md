@@ -97,6 +97,6 @@ A huge thank you to everyone who contributed to this project! 🎉
 |------|--------------|------|
 | Andrei Boacă | [@dreilex](https://github.com/dreilex) | Project Lead & Full Stack Developer |
 | Silina Nassar | [@SilinaNassar](https://github.com/SilinaNassar) | Project Lead & Full Stack Developer |
-| Hanna Mandzyuk | [@mhanna-github](https://github.com/mhanna-github) | Frontend Developer |
-| Sary Nassar | - | Logo Designer |
+| Hanna  | [@mhanna-github](https://github.com/mhanna-github) | Frontend Developer |
+| Sary Nassar | Logo Designer |
 
