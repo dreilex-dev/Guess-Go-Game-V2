@@ -90,9 +90,9 @@ const Home = ({ showLoader, setShowLoader }) => {
                                 <strong>Contributors:</strong>
                                 <div className='modal-footer'>
                                     <a href="https://github.com/SilinaNassar">Silina Nassar</a>
-                                    <a href="https://github.com/dreilex">Andrei Boacă</a>
+                                    <a href="https://github.com/dreilex-dev">Andrei Boacă</a>
                                     <a href="https://github.com/mhanna-github">Hanna Mandzyuk</a>
-                                    <a href="#">Sary Nassar</a>
+                                    <a href="https://www.behance.net/sarynass">Sary Nassar</a>
                                 </div>
                             </footer>
                         </div>
