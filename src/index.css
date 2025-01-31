@@ -9,6 +9,7 @@
   align-items: center;
 }
 
+
 .overflow-hidden {
   overflow: hidden;
 }
@@ -94,7 +95,16 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  color: white;
+  width: 100vw;
+  background-color: #209AAB;
+  overflow-x: hidden;
+}
+
+.content {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
 .container {
@@ -116,27 +126,31 @@ body {
 }
 
 button {
+  
   padding: 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
   text-align: center;
   display: inline-block;
   transition: background-color 0.3s ease, color 0.3s ease;
+
+
   .btn-primary {
-    background-color: #b8001f;
-    color: white;
+    background: linear-gradient(45deg,  #57DFF2, #004D74); 
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
 
     &:hover {
-      background-color: #99021b;
+      background-color: #ffffff;
     }
   }
 
   .btn-secondary {
     background-color: #1b9aaa;
     color: white;
+    border-radius: 15px;
 
     &:hover {
       background-color: #167d8b;
@@ -163,8 +177,8 @@ button {
   position: fixed;
   top: 0;
   left: 0;
-  width: 80vw;
-  height: 90vh;
+  width: 100%;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
@@ -175,7 +189,7 @@ button {
 .modal {
   background-color: white;
   border-radius: 10px;
-  width: 80%;
+  width: 95%;
   max-width: 500px;
   padding: 30px;
   position: relative;

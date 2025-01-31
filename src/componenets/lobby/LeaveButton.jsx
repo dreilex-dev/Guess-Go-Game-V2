@@ -4,7 +4,7 @@ import "../details/details.css";
 
 const LeaveButton = ({ onLeave }) => {
   return (
-    <button className="btn btn-primary leave-button-size" onClick={onLeave}>
+    <button className="leave-button" onClick={onLeave}>
       Leave
     </button>
   );

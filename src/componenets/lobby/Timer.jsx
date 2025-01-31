@@ -82,7 +82,7 @@ const Timer = ({ players }) => {
   };
 
   return (
-    <div className={`timer ${getTimerClass()}`}>
+    <div className={`timer  ${getTimerClass()}`}>
       {timeLeft === 0 ? (
         "Time's up!"
       ) : (

@@ -128,6 +128,7 @@ const Chat = () => {
   console.log(userPlayingData);
 
   return (
+  
     <div className="chat">
       <div className="top">
         <div className="userChatSection">
@@ -139,7 +140,7 @@ const Chat = () => {
             <span>
               {userPlayingData ? userPlayingData.username : "Loading..."}
             </span>
-            <p>Guess who am I ! </p>
+            <p className="guess">Guess who am I ! </p>
           </div>
         </div>
         <div className="icons">

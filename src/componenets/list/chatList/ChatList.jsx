@@ -232,7 +232,7 @@ const ChatList = () => {
     <div className="chatList">
       <div className="search">
         <div className="searchBar">
-          <img src="./search.png" alt="search" />
+          {/* <img src="./search.png" alt="search" /> */}
           <input
             type="text"
             placeholder="Search"
