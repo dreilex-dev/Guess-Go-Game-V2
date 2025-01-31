@@ -93,7 +93,7 @@ const playersWithRanks = players.length > 0 ? calculateRanks(players) : [];
     <div className="lobby-container">
       <div className="lobby-header">
         <div className="lobby-code-container">
-          <Timer players={players} />
+          <Timer  className="border-walker" players={players} />
         </div>
 
         <div className="leave-button-container">

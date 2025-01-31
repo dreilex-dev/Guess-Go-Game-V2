@@ -69,7 +69,7 @@ const Home = ({ showLoader, setShowLoader }) => {
                                 <h3>Points:</h3>
                                 <ul>
                                     <li>• Correct guess: +1</li>
-                                    <li>• Wrong guess: -5</li>
+                                    <li>• Warning: Each hint adds 30s penalty</li>
                                 </ul>
                             </div>
                             <div className="modal-section">

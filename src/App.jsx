@@ -107,6 +107,7 @@ const App = () => {
   
   return (
       <Router>
+        {showRedBorder && <div className="absolute border-walker"></div>}
         {showLoader && <Loader onLoadingComplete={handleLoadingComplete} />}
           <Routes>
             <Route 
