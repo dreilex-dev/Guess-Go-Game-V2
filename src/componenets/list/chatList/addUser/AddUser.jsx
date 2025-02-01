@@ -7,12 +7,15 @@ import { toast } from "react-toastify";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   const { currentUser, setAllPlayers, allPlayers, setCurrentUser } =
     useUserStore();
+
 
   const CustomPrevArrow = ({ className, style, onClick }) => (
     <div
@@ -164,6 +167,7 @@ const AddUser = () => {
 
       setAllPlayers(users);
       toast.success("All players are ready!");
+      navigate("/");
     } catch (error) {
       console.log("Failed to update game state or assign players.");
       console.error(error);
@@ -211,6 +215,7 @@ const AddUser = () => {
           updateDoc(userDocRef, {
             is_playing: assignedId,
             no_of_hints: hintsValue,
+            initialHints: hintsValue,
           })
         );
 

@@ -125,7 +125,7 @@ const Chat = () => {
     return null;
   };
 
-  console.log(userPlayingData);
+
 
   return (
   

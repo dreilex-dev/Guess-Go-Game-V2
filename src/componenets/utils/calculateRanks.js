@@ -1,48 +1,38 @@
 export const calculateRanks = (players) => {
-  console.log("=== Starting Rank Calculations ===");
-  
-  // Step 1: Calculate time penalties for hints
-  const sortedPlayers = [...players].map(player => {
-    const hintsUsed = 2 - (player.no_of_hints || 0);
-    const HINT_PENALTY = 30000; // 30 seconds in milliseconds
-    const timeWithPenalty = (player.lastGuessTakenTime || 0) + (hintsUsed * HINT_PENALTY);
+  console.log("Initial players data:", players);
 
-    // console.log(`\nPlayer ${player.username || player.id}:`);
-    // console.log(`- Original time: ${player.lastGuessTakenTime ? new Date(player.lastGuessTakenTime).toISOString() : 'No time'}`);
-    // console.log(`- Hints used: ${hintsUsed} (${hintsUsed * 30}s penalty)`);
-    // console.log(`- Final time with penalty: ${new Date(timeWithPenalty).toISOString()}`);
-    // console.log(`- Points: ${player.points || 0}`);
+  const updatedPlayers = players.map(player => ({
+    ...player,
+    hintsUsed: (player.initialHints || 0) - (player.no_of_hints || 0),
+  }));
 
-    return {
-      ...player,
-      adjustedTime: timeWithPenalty,
-      adjustedPoints: player.points || 0
-    };
-  });
+  console.log("Players after calculating hints used:", updatedPlayers);
 
-  // Step 2: Sort players by points first, then by adjusted time
-  sortedPlayers.sort((a, b) => {
-    if (b.adjustedPoints !== a.adjustedPoints) {
-      return b.adjustedPoints - a.adjustedPoints;
+  const sortedPlayers = [...updatedPlayers].sort((a, b) => {
+    if ((b.points || 0) !== (a.points || 0)) {
+      console.log(`Sorting by points: ${b.username} (${b.points}) vs ${a.username} (${a.points})`);
+      return (b.points || 0) - (a.points || 0);
     }
-    return a.adjustedTime - b.adjustedTime;
+    
+    const aHintPenalty = (a.hintsUsed || 0) * 30000; 
+    const bHintPenalty = (b.hintsUsed || 0) * 30000;
+
+    console.log(`Hint penalties: ${a.username} (${aHintPenalty}) vs ${b.username} (${bHintPenalty})`);
+    console.log(`Comparing last guess time: ${a.lastGuessTakenTime + aHintPenalty} vs ${b.lastGuessTakenTime + bHintPenalty}`);
+    
+    return (a.lastGuessTakenTime + aHintPenalty) - (b.lastGuessTakenTime + bHintPenalty);
   });
 
-  // Step 3: Assign ranks and log final results
-  // console.log("\n=== Final Rankings ===");
-  const rankedPlayers = sortedPlayers.map((player, index) => {
-    const rank = index < 3 ? index + 1 : null;
-    console.log(`${rank || 'No rank'}: ${player.username || player.id}`);
-    console.log(`   Points: ${player.adjustedPoints}`);
-    console.log(`   Final Time: ${new Date(player.adjustedTime).toISOString()}`);
-    return {
-      ...player,
-      rank
-    };
-  });
+  console.log("Sorted players by rank:", sortedPlayers);
 
-  // console.log("=== Calculation Complete ===\n");
+  const rankedPlayers = sortedPlayers.map((player, index) => ({
+    ...player,
+    rank: index < 3 ? index + 1 : null,
+    initialHints: player.initialHints || 0,
+    hintsUsed: player.hintsUsed || 0,
+  }));
+
+  console.log("Final ranked players:", rankedPlayers);
+
   return rankedPlayers;
 };
-
-export default calculateRanks;
