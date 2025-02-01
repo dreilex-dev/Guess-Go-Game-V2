@@ -1,0 +1,234 @@
+.container {
+  position: relative;
+  width: 80vw;
+  max-height: 90vh;
+  background-color: rgba(17, 25, 40, 0.75);
+  backdrop-filter: blur(19px) saturate(180%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+}
+
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.border-walker {
+  position: absolute;
+  background-color: red;
+  animation: walk-around 3s linear infinite;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 1), 0 0 30px rgba(255, 0, 0, 0.8);
+  z-index: 9999;
+}
+
+@keyframes walk-around {
+  0% {
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 5px;
+  }
+  25% {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+  }
+  30% {
+    top: 0;
+    left: 100%;
+    width: 5px;
+    height: 5px;
+    transform: translateX(-100%);
+  }
+  50% {
+    top: 0;
+    left: 100%;
+    width: 5px;
+    height: 100%;
+    transform: translateX(-100%);
+  }
+  55% {
+    top: 100%;
+    left: 100%;
+    width: 5px;
+    height: 5px;
+    transform: translate(-100%, -100%);
+  }
+  75% {
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    transform: translateY(-100%);
+  }
+  80% {
+    top: 100%;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    transform: translateY(-100%);
+  }
+  100% {
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-image: url("/background/88.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #209AAB;
+  overflow-x: hidden;
+}
+
+.content {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  position: relative;
+  width: 80vw;
+  max-height: 90vh;
+  background-color: rgba(17, 25, 40, 0.75);
+  backdrop-filter: blur(19px) saturate(180%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.loading {
+  padding: 50px;
+  font-size: 36px;
+  border-radius: 10px;
+  background-color: rgba(17, 25, 40, 0.9);
+}
+
+button {
+  
+  padding: 15px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+
+  .btn-primary {
+    background: linear-gradient(45deg,  #57DFF2, #004D74); 
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
+
+    &:hover {
+      background-color: #ffffff;
+    }
+  }
+
+  .btn-secondary {
+    background-color: #1b9aaa;
+    color: white;
+    border-radius: 15px;
+
+    &:hover {
+      background-color: #167d8b;
+    }
+  }
+}
+
+.navigate-btn {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navigate-btn:hover {
+  background-color: #45a049;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 10px;
+  width: 95%;
+  max-width: 500px;
+  padding: 30px;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.close-btn:hover {
+  transform: rotate(90deg);
+}
+
+.card {
+  text-align: center;
+}
+
+.card h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #1b9aaa;
+}
+
+.card h3 {
+  font-size: 20px;
+  color: #555;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  object-fit: cover;
+}

@@ -1,0 +1,322 @@
+@import '../typography.css';
+
+.player-card-container {
+    text-align: center;
+    background: linear-gradient(135deg, #06d6a0, #1b9aaa);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px;
+    transition: all 0.3s ease;
+    min-width: 280px;
+    max-width: 320px;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    flex-direction: column;
+    gap: 10px;
+    backdrop-filter: blur(5px);
+  }
+  
+  .player-card-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
+    opacity: 0.7;
+    z-index: 1;
+  }
+  
+  .player-card-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(6, 214, 160, 0.3);
+  }
+  
+  .player-avatar {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .player-avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .player-name {
+    font-family: var(--font-primary);
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: #333;
+    margin: 15px 0;
+  }
+  
+  .player-card-body {
+    padding: 15px;
+  }
+  
+  .player-card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .chat-button,
+  .reveal-button {
+    font-family: var(--font-primary);
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    padding: 10px 25px;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .chat-button {
+    background: linear-gradient(45deg, #06d6a0, #1b9aaa);
+    box-shadow: 0 4px 15px rgba(6, 214, 160, 0.3);
+  }
+  
+  .reveal-button {
+    background: linear-gradient(45deg, #1b9aaa, #b8001f);
+    box-shadow: 0 4px 15px rgba(27, 154, 170, 0.3);
+  }
+  
+  .chat-button:hover,
+  .reveal-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(6, 214, 160, 0.4);
+  }
+  
+  .player-username {
+    font-family: var(--font-primary);
+    font-size: var(--text-base);
+    font-weight: var(--font-medium);
+    color: #f8ffe5;
+    text-align: center;
+    margin-top: 5px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1200px) {
+    .player-card-container {
+      min-width: 260px;
+      max-width: 300px;
+    }
+  
+    .player-avatar {
+      width: 160px;
+      height: 160px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .player-card-container {
+      min-width: 240px;
+      max-width: 280px;
+    }
+  
+    .player-avatar {
+      width: 140px;
+      height: 140px;
+    }
+  
+    .player-name {
+      font-size: var(--text-base);
+    }
+  
+    .player-username,
+    .chat-button,
+    .reveal-button,
+    .playing-as,
+    .real-username.show,
+    .playing-as-label,
+    .real-player-label,
+    .handle {
+      font-size: var(--text-sm);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .player-card-container {
+      min-width: 220px;
+      max-width: 260px;
+    }
+  
+    .player-avatar {
+      width: 120px;
+      height: 120px;
+    }
+  }
+
+.player-card {
+  position: relative;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Stilul comun pentru toate label-urile */
+.real-player-label, .playing-as-label {
+  font-family: var(--font-secondary);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: #f8ffe5;  /* Aceeași culoare ca textul principal */
+  margin-right: 8px;
+  opacity: 1;  /* Am eliminat transparența */
+  letter-spacing: 0.5px;
+}
+
+.playing-as, .real-username {
+  background: rgba(27, 154, 170, 0.15);
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: #f8ffe5;
+  letter-spacing: 0.5px;
+  position: relative;
+  width: fit-content;
+  backdrop-filter: blur(4px);
+  box-shadow: 
+    0 2px 8px rgba(27, 154, 170, 0.2),
+    inset 0 1px 4px rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: default;
+}
+
+.playing-as::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -15px;
+  right: -15px;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(27, 154, 170, 0.1) 15%,
+    rgba(27, 154, 170, 0.1) 85%,
+    transparent
+  );
+  z-index: -1;
+  border-radius: 20px;
+}
+
+.playing-as:hover {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 4px 8px rgba(27, 154, 170, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 
+      0 2px 8px rgba(27, 154, 170, 0.2),
+      inset 0 1px 4px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 8px 20px rgba(27, 154, 170, 0.4),
+      inset 0 2px 8px rgba(255, 255, 255, 0.4),
+      0 0 15px rgba(27, 154, 170, 0.3);
+  }
+  100% {
+    box-shadow: 
+      0 2px 8px rgba(27, 154, 170, 0.2),
+      inset 0 1px 4px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.real-username:not(.hidden) {
+  animation: 
+    fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards,
+    glowPulse 3s ease-in-out infinite;
+}
+
+.real-username::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -15px;
+  right: -15px;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(27, 154, 170, 0.2) 15%,
+    rgba(27, 154, 170, 0.2) 85%,
+    transparent
+  );
+  z-index: -1;
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.real-username:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 
+    0 12px 24px rgba(27, 154, 170, 0.4),
+    inset 0 2px 8px rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(27, 154, 170, 0.3);
+}
+
+.real-username:hover::before {
+  opacity: 0.9;
+  transform: scale(1.1);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(27, 154, 170, 0.3) 15%,
+    rgba(27, 154, 170, 0.3) 85%,
+    transparent
+  );
+}
+
+.handle {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  /* ... restul stilurilor existente ... */
+}

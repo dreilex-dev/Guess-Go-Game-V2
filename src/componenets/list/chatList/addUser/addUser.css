@@ -1,0 +1,195 @@
+.addUser {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  padding: 30px;
+  background: rgba(25, 27, 48, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid #00647A;
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+
+  form {
+    display: flex;
+    gap: 20px;
+
+    input {
+      padding: 20px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #1b9aaa;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  .usersList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  button {
+    font-weight: 900;
+    letter-spacing: 0.8px;
+    display: flex;
+    padding:  15px;
+    border-radius: 10px; 
+    font-size: 16px;
+    text-transform: uppercase;
+    background-color: #ffffff;
+    color: #209AAB;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #1b9902;
+    color: #ffffff;
+  }
+
+  .closeBtn {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .closeBtn:hover {
+    color: darkred;
+    background-color: transparent;
+  }
+}
+
+.controls {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.game-code-label {
+  background-color: #1B9AAA;
+  color: #ffffff; 
+  padding:  12px;
+  border-radius: 10px; 
+  font-weight: 900;
+    letter-spacing: 0.8px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+
+  &:hover {
+    background-color: #ffffff;
+    color: #209AAB;
+  } 
+}
+
+
+.game-code-label:active {
+  transform: scale(0.98);
+}
+
+.usersSlider {
+  width: 100vh;
+  margin: 20px auto;
+}
+
+
+.user {
+  max-width: 200px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #209AAB;
+  text-align: center;
+}
+
+.user img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.user span {
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.slick-prev,
+.slick-next {
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%);
+  z-index: 1000; /* Ensure the arrows are on top */
+  background-image: './icon.png';
+}
+
+.slick-prev {
+  display: none;
+  left: -40px; /* Adjust as needed */
+}
+
+.slick-next {
+  right: -40px; /* Adjust as needed */
+}
+
+.slick-prev::before,
+.slick-next::before {
+  content: ""; /* Remove default arrow icons */
+}
+
+
+
+

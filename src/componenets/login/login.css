@@ -1,0 +1,107 @@
+h2 {
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+.login {
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    gap: 75px;
+    align-items: start;
+    justify-content: space-around;
+    position: relative;
+    background: rgba(25, 27, 48, 0.5);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    z-index: 1002;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px 50px;
+    border: 2px solid #00647A;
+  
+    .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+  
+        input {
+          padding: 20px;
+          border: none;
+          outline: none;
+          background-color: rgba(255, 255, 255, 1);
+          color: #167d8b;
+          border-radius: 15px;
+          font-weight: 600;
+          border: 1.5px solid #167d8b;
+          font-size: 16px;
+          color: #00647A;
+        }
+  
+        label {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          cursor: pointer;
+          text-decoration: underline;
+  
+          img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: cover;
+            opacity: 0.6;
+          }
+        }
+  
+        button {
+          width: 100%;
+          padding: 20px;
+          border: none;
+          background: linear-gradient(45deg,  #209AAB, #004D74); 
+          box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
+          color: #ffffff;
+          border-radius: 10px;
+          cursor: pointer;
+          font-size: 20px;
+          font-weight: 600;
+          text-transform: uppercase;
+          margin-top: 10px;
+
+          &:hover {
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #8afbff, #ffffff); 
+            color: #00647A;
+        }
+  
+          &:disabled {
+            cursor: not-allowed;
+            background-color: #167d8b;
+          }
+        }
+      }
+    }
+  
+    .separator {
+      height: 80%;
+      width: 2px;
+      background-color: #dddddd35;
+    }
+  }
+
+  @media (max-width: 768px) {
+   .login {
+    flex-direction: column;
+    gap: 50px;
+   }
+}
