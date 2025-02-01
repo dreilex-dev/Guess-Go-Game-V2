@@ -76,7 +76,7 @@ const Lobby = () => {
 
   const handleChatClick = () => navigate("/chat_room");
 
-  // ✅ Fix: Asigurăm că `playersWithRanks` este declarat o singură dată
+  // ✅ fix: calculateRanks is called only when isTimeUp is true
   const rankedPlayers = isTimeUp ? calculateRanks(players) : players;
 
   return (
@@ -134,5 +134,6 @@ const Lobby = () => {
     </div>
   );
 };
+
 
 export default Lobby;
