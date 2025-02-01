@@ -9,16 +9,16 @@ import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-console.log("Firebase API Key:", import.meta.env.VITE_API_KEY);
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
-  authDomain: "guessandgoversiontwo.firebaseapp.com",
-  projectId: "guessandgoversiontwo",
-  storageBucket: "guessandgoversiontwo.firebasestorage.app",
-  messagingSenderId: "827933428607",
-  appId: "1:827933428607:web:25a0cb05de905e9b14e84a",
-  measurementId: "G-XZN76DCT1N",
+  authDomain: "guessandgov3-8039a.firebaseapp.com",
+  projectId: "guessandgov3-8039a",
+  storageBucket: "guessandgov3-8039a.firebasestorage.app",
+  messagingSenderId: "391837604881",
+  appId: "1:391837604881:web:a0560252a2b9cf330525b0",
+  measurementId: "G-5VCTX23Y23"
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

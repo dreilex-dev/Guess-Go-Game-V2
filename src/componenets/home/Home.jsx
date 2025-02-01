@@ -11,7 +11,7 @@ const Home = ({ showLoader, setShowLoader }) => {
 
     const handleNavigate = () => {
         setShowLoader(true)
-        navigate('/game', { replace: true })
+        navigate('/login', { replace: true })
     }
 
     const handleClose = () => {
