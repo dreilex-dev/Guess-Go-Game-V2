@@ -36,7 +36,7 @@ const GuessModal = ({ handleCloseModal, fakeIdentity }) => {
         />
         <div className="card">
           <h2>Hey, {currentUser.username}</h2>
-          <h3>How you think {fakeIdentity.username} is?</h3>
+          <h3>Who do you think {fakeIdentity.username} is?</h3>
           <img
             src={fakeIdentity?.avatar || "./avatar.png"}
             alt="User Avatar"

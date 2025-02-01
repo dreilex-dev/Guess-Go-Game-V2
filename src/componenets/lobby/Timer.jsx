@@ -19,9 +19,9 @@ const Timer = ({ players }) => {
       if (docSnapshot.exists()) {
         const data = docSnapshot.data();
 
-        // Verificăm dacă jocul este în starea "ready"
+        // we check if the game is ready
         if (data.gameState === "ready") {
-          // Inițializăm timer-ul dacă nu există
+          // we initialize the timer if it doesn't exist
           if (!data.timerStart || !data.timerDuration) {
             const calculatedTime = players.length * 2 * 60;
             
@@ -34,13 +34,13 @@ const Timer = ({ players }) => {
               console.error("Error updating timer:", error);
             }
           } else {
-            // Calculăm timpul rămas
+            // we calculate the remaining time
             const elapsed = Math.floor((Date.now() - data.timerStart) / 1000);
             const remaining = Math.max(0, data.timerDuration - elapsed);
             setTimeLeft(remaining);
             setTotalTime(data.timerDuration);
 
-            // Setăm intervalul pentru actualizare
+            // we set the interval for the update
             if (timerInterval) clearInterval(timerInterval);
             
             timerInterval = setInterval(() => {
@@ -50,7 +50,7 @@ const Timer = ({ players }) => {
 
               if (newRemaining === 0) {
                 clearInterval(timerInterval);
-                // Emitem evenimentul când timerul ajunge la 0
+                // we emit the event when the timer reaches 0
                 window.dispatchEvent(new Event('showRealNames'));
               }
             }, 1000);
@@ -67,7 +67,7 @@ const Timer = ({ players }) => {
     };
   }, [currentUser?.game_code, players]);
 
-  // Nu afișăm nimic dacă nu avem timp
+  // we don't display anything if we don't have time
   if (!timeLeft && !totalTime) return null;
 
   const minutes = Math.floor(timeLeft / 60);

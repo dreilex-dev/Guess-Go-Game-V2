@@ -13,11 +13,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Timer from "./Timer";
 import RevealedPlayerCard from "./RevealedPlayerCard";
-
 import { calculateRanks } from "../utils/calculateRanks";
-
 import LogOutButton from "../LogOutButton";
-
 
 const Lobby = () => {
   const navigate = useNavigate();
@@ -37,27 +34,29 @@ const Lobby = () => {
             (participant) => participant.id
           );
 
-          const fetchedPlayers = [];
-          for (const playerId of participantIds) {
-            const playerRef = doc(db, "users", playerId);
-            const playerSnap = await getDoc(playerRef);
-            if (playerSnap.exists()) {
-              const playerData = playerSnap.data();
-              if (playerData.is_playing) {
-                const playingUserRef = doc(db, "users", playerData.is_playing);
-                const playingUserSnap = await getDoc(playingUserRef);
-                if (playingUserSnap.exists()) {
-                  const playingUserData = playingUserSnap.data();
-                  fetchedPlayers.push({
-                    ...playerData,
-                    playingAs: playingUserData.username,
-                  });
+          const fetchedPlayers = await Promise.all(
+            participantIds.map(async (playerId) => {
+              const playerRef = doc(db, "users", playerId);
+              const playerSnap = await getDoc(playerRef);
+              if (playerSnap.exists()) {
+                const playerData = playerSnap.data();
+                if (playerData.is_playing) {
+                  const playingUserRef = doc(db, "users", playerData.is_playing);
+                  const playingUserSnap = await getDoc(playingUserRef);
+                  if (playingUserSnap.exists()) {
+                    return {
+                      ...playerData,
+                      playingAs: playingUserSnap.data().username,
+                    };
+                  }
                 }
+                return playerData;
               }
-            }
-          }
+              return null;
+            })
+          );
 
-          setPlayers(fetchedPlayers);
+          setPlayers(fetchedPlayers.filter(Boolean)); // Elimină null-urile
         } else {
           console.error("Lobby does not exist!");
         }
@@ -70,23 +69,15 @@ const Lobby = () => {
   }, [lobbyCode]);
 
   useEffect(() => {
-    const handleTimeUp = () => {
-      setIsTimeUp(true);
-    };
-
+    const handleTimeUp = () => setIsTimeUp(true);
     window.addEventListener("showRealNames", handleTimeUp);
     return () => window.removeEventListener("showRealNames", handleTimeUp);
   }, []);
 
-  const handleChatClick = () => {
-    navigate("/chat_room");
-  };
+  const handleChatClick = () => navigate("/chat_room");
 
-
-  // calculate ranks
-  const playersWithRanks = isTimeUp 
-  ? (players.length > 0 ? calculateRanks(players) : []) 
-  : players;
+  // ✅ fix: calculateRanks is called only when isTimeUp is true
+  const rankedPlayers = isTimeUp ? calculateRanks(players) : players;
 
   // calculate ranks
 const playersWithRanks = players.length > 0 ? calculateRanks(players) : [];
@@ -95,22 +86,19 @@ const playersWithRanks = players.length > 0 ? calculateRanks(players) : [];
     <div className="lobby-container">
       <div className="lobby-header">
         <div className="lobby-code-container">
-          <Timer  players={players} />
+          <Timer players={players} />
         </div>
 
         <div className="leave-button-container">
           {isTimeUp ? (
             <button
               className="leave-button"
-              onClick={() => {
-                const resetUser = useUserStore.getState().resetUser;
-                resetUser();
-              }}
+              onClick={() => useUserStore.getState().resetUser()}
             >
               Play Again
             </button>
           ) : (
-            <LogOutButton/>
+            <LogOutButton />
           )}
         </div>
       </div>
@@ -123,23 +111,13 @@ const playersWithRanks = players.length > 0 ? calculateRanks(players) : [];
           spaceBetween={30}
           slidesPerView={3}
           breakpoints={{
-            320: {
-              slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            481: {
-              slidesPerView: 2,
-              spaceBetween: 15,
-            },
-            769: {
-              slidesPerView: 3,
-              spaceBetween: 20,
-            },
+            320: { slidesPerView: 1, spaceBetween: 10 },
+            481: { slidesPerView: 2, spaceBetween: 15 },
+            769: { slidesPerView: 3, spaceBetween: 20 },
           }}
           className="players-swiper"
         >
-          {playersWithRanks.map((player) => (
-            <div key={player.id}>
+          {rankedPlayers.map((player) => (
             <SwiperSlide key={player.id}>
               {isTimeUp ? (
                 <RevealedPlayerCard player={player} rank={player.rank} />
@@ -147,18 +125,18 @@ const playersWithRanks = players.length > 0 ? calculateRanks(players) : [];
                 <PlayerCard player={player} />
               )}
             </SwiperSlide>
-            </div>
           ))}
         </Swiper>
       </div>
 
       {!isTimeUp && (
         <div className="chat-button-container">
-          <ChatButton  onChatClick={handleChatClick} />
+          <ChatButton onChatClick={handleChatClick} />
         </div>
       )}
     </div>
   );
 };
+
 
 export default Lobby;
