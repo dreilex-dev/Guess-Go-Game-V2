@@ -1,33 +1,38 @@
 export const calculateRanks = (players) => {
-  // Step 1: Sort players by points and response time
-  const sortedPlayers = [...players].map(player => {
-    const totalHints = player.initialHints || 3; // Set default to 3 hints if not present
-    const hintsUsed = totalHints - (player.no_of_hints || 0);
+  console.log("Initial players data:", players);
 
-    let bonusPoints = 0;
-    if (hintsUsed === 0) {
-      bonusPoints = 1; // If no hints were used, add 2 points
-    } else if (hintsUsed <= totalHints / 2) {
-      bonusPoints = 0.5; // If half or less hints were used, add 1 point
-    }
-
-    return {
-      ...player,
-      adjustedPoints: (player.points || 0) + bonusPoints, // Include bonus points in ranking
-    };
-  });
-
-  // Step 2: Sort players by adjusted points and lastGuessTakenTime
-  sortedPlayers.sort((a, b) => {
-    if (b.adjustedPoints !== a.adjustedPoints) {
-      return b.adjustedPoints - a.adjustedPoints; // Higher adjusted points first
-    }
-    return (a.lastGuessTakenTime || Infinity) - (b.lastGuessTakenTime || Infinity); // Faster response first
-  });
-
-  // Step 3: Assign ranks only to the top 3 players
-  return sortedPlayers.map((player, index) => ({
+  const updatedPlayers = players.map(player => ({
     ...player,
-    rank: index < 3 ? index + 1 : null, // Assign rank 1, 2, 3 to the top 3 players
+    hintsUsed: (player.initialHints || 0) - (player.no_of_hints || 0),
   }));
+
+  console.log("Players after calculating hints used:", updatedPlayers);
+
+  const sortedPlayers = [...updatedPlayers].sort((a, b) => {
+    if ((b.points || 0) !== (a.points || 0)) {
+      console.log(`Sorting by points: ${b.username} (${b.points}) vs ${a.username} (${a.points})`);
+      return (b.points || 0) - (a.points || 0);
+    }
+    
+    const aHintPenalty = (a.hintsUsed || 0) * 30000; 
+    const bHintPenalty = (b.hintsUsed || 0) * 30000;
+
+    console.log(`Hint penalties: ${a.username} (${aHintPenalty}) vs ${b.username} (${bHintPenalty})`);
+    console.log(`Comparing last guess time: ${a.lastGuessTakenTime + aHintPenalty} vs ${b.lastGuessTakenTime + bHintPenalty}`);
+    
+    return (a.lastGuessTakenTime + aHintPenalty) - (b.lastGuessTakenTime + bHintPenalty);
+  });
+
+  console.log("Sorted players by rank:", sortedPlayers);
+
+  const rankedPlayers = sortedPlayers.map((player, index) => ({
+    ...player,
+    rank: index < 3 ? index + 1 : null,
+    initialHints: player.initialHints || 0,
+    hintsUsed: player.hintsUsed || 0,
+  }));
+
+  console.log("Final ranked players:", rankedPlayers);
+
+  return rankedPlayers;
 };

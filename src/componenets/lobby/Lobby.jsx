@@ -82,18 +82,17 @@ const Lobby = () => {
     navigate("/chat_room");
   };
 
-  const handleLeave = () => {
-    console.log("Leave button clicked!");
-  };
 
   // calculate ranks
-const playersWithRanks = players.length > 0 ? calculateRanks(players) : [];
+  const playersWithRanks = isTimeUp 
+  ? (players.length > 0 ? calculateRanks(players) : []) 
+  : players;
 
   return (
     <div className="lobby-container">
       <div className="lobby-header">
         <div className="lobby-code-container">
-          <Timer  className="border-walker" players={players} />
+          <Timer  players={players} />
         </div>
 
         <div className="leave-button-container">
@@ -137,7 +136,7 @@ const playersWithRanks = players.length > 0 ? calculateRanks(players) : [];
           className="players-swiper"
         >
           {playersWithRanks.map((player) => (
-            <div>
+            <div key={player.id}>
             <SwiperSlide key={player.id}>
               {isTimeUp ? (
                 <RevealedPlayerCard player={player} rank={player.rank} />

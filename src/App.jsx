@@ -19,6 +19,7 @@ import GameLobby from "./componenets/GameLobby";
 import React from "react";
 import Home from "./componenets/home/Home";
 import Loader from "./componenets/loader/Loader";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
   const {
@@ -40,6 +41,7 @@ const App = () => {
   const [showRedBorder, setShowRedBorder] = useState(false);
 
   const [showLoader, setShowLoader] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!currentUser) {
@@ -68,9 +70,7 @@ const App = () => {
       return () => unsubscribe();
     }
   }, [currentUser, currentUser?.game_code, setGameState]);
-  console.log(currentUser?.username);
-  console.log(currentUser?.game_code);
-  console.log(gameState);
+
 
   useEffect(() => {
     if (timerDuration && timerStart) {
@@ -97,7 +97,17 @@ const App = () => {
     }
   }, [timerDuration, timerStart]);
 
-  console.log(gameState);
+  useEffect(() => {
+    if (currentUser && gameState === "ready") {
+      if (window.location.pathname !== "/chat_room") {
+        console.log("Navigating to /");
+        navigate("/");
+      }
+    }
+  }, [gameState, currentUser, navigate]);
+  
+
+ 
 
   const handleLoadingComplete = () => {
     setShowLoader(false);
@@ -106,42 +116,40 @@ const App = () => {
   if (isLoading) return <div className="loading">Loading..</div>;
   
   return (
-      <Router>
+      <>
         {showRedBorder && <div className="absolute border-walker"></div>}
         {showLoader && <Loader onLoadingComplete={handleLoadingComplete} />}
           <Routes>
-            <Route 
-              path="/" 
-              element={
-                <Home 
-                  showLoader={showLoader} 
-                  setShowLoader={setShowLoader} 
-                />
-              } 
-            />
-            {!currentUser && (
+          {!currentUser && (
               <Route 
-                path="/game/*" 
-                element={<Login setShowLoader={setShowLoader} />} 
+                path="*" 
+                element={<Home showLoader={showLoader} setShowLoader={setShowLoader}/>} 
               />
-            )}
-            {currentUser && gameState !== "ready" && (
+          )}
+          {!currentUser && (
               <Route 
-                path="/game/*" 
-                element={<AddUser setShowLoader={setShowLoader} />} 
+                path="/login" 
+                element={<Login />} 
               />
-            )}
-            {currentUser && gameState === "ready" && (
+          )}
+          {currentUser && gameState !== "ready" && (
+            <Route path="*" element={<AddUser />} />
+          )}
+            {currentUser && gameState==="ready" && (
               <>
                 <Route 
-                  path="/game" 
-                  element={<GameLobby setShowLoader={setShowLoader} />} 
+                  path="/" 
+                  element={<GameLobby />} 
                 />
-                <Route
-                  path="/chat_room"
-                  element={
+
+              <Route
+                path="/chat_room"
+                element={
+                  isTimeUp ? (
+                    <Navigate to="/" replace />
+                  ) : (
                     <>
-                      <List setShowLoader={setShowLoader} />
+                      <List />
                       {chatId && (
                         <>
                           <Chat />
@@ -149,13 +157,14 @@ const App = () => {
                         </>
                       )}
                     </>
-                  }
-                />
+                  )
+                }
+              />
               </>
             )}
           </Routes>
         <Notification />
-      </Router>
+      </>
   );
 };
 

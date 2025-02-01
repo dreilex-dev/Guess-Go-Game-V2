@@ -33,32 +33,7 @@ export const useUserStore = create((set, get) => ({
     }
   },
 
-  /*incrementPoints: async () => {
-    try {
-      const state = get();
-      const currentUser = state.currentUser;
-
-      if (!currentUser) {
-        console.log("No current user is found!");
-        return;
-      }
-      const docRef = doc(db, "users", currentUser.id);
-      await updateDoc(docRef, {
-        points: (currentUser.points || 0) + 1,
-      });
-
-      set((prevState) => ({
-        ...prevState,
-        currentUser: {
-          ...currentUser,
-          points: (currentUser.points || 0) + 1,
-        },
-      }));
-    } catch (err) {
-      console.error("Error incrementing points:", err);
-      }
-    },*/
-
+  
     addGuess: async (userId, guessedUsername) => {
       try {
         const state = get();
