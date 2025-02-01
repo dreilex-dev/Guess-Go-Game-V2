@@ -33,57 +33,55 @@ export const useUserStore = create((set, get) => ({
     }
   },
 
-  
-    addGuess: async (userId, guessedUsername) => {
-      try {
-        const state = get();
-        const currentUser = state.currentUser;
-    
-        if (!currentUser) {
-          console.error("No current user found!");
-          return;
-        }
+  addGuess: async (userId, guessedUsername) => {
+    try {
+      const state = get();
+      const currentUser = state.currentUser;
 
-        const chatStore = useChatStore.getState();
-        const chatUser = chatStore.user;
-
-        if (!chatUser) {
-          console.error("No active chat user found!");
-          return;
-        }
-    
-        const guessedUsers = currentUser.guessedUsers || [];
-    
-        if (guessedUsers.includes(userId)) {
-          toast.error("You have already guessed for this user!");
-          return;
-        }
-    
-        const isCorrectGuess =
-          guessedUsername.trim().toLowerCase() ===
-          chatUser.username.toLowerCase();
-    
-        const updatedData = {
-          guessedUsers: [...guessedUsers, userId],
-          lastGuessTakenTime: Date.now(),
-          ...(isCorrectGuess && { points: (currentUser.points || 0) + 1 }),
-        };
-    
-        const docRef = doc(db, "users", currentUser.id);
-        await updateDoc(docRef, updatedData);
-    
-        set({
-          currentUser: {
-            ...currentUser,
-            ...updatedData,
-          },
-        });
-      } catch (error) {
-        console.error("Error handling guess:", error);
-        toast.error("Something went wrong. Please try again.");
+      if (!currentUser) {
+        console.error("No current user found!");
+        return;
       }
-    },
-    
+
+      const chatStore = useChatStore.getState();
+      const chatUser = chatStore.user;
+
+      if (!chatUser) {
+        console.error("No active chat user found!");
+        return;
+      }
+
+      const guessedUsers = currentUser.guessedUsers || [];
+
+      if (guessedUsers.includes(userId)) {
+        toast.error("You have already guessed for this user!");
+        return;
+      }
+
+      const isCorrectGuess =
+        guessedUsername.trim().toLowerCase() ===
+        chatUser.username.toLowerCase();
+
+      const updatedData = {
+        guessedUsers: [...guessedUsers, userId],
+        lastGuessTakenTime: Date.now(),
+        ...(isCorrectGuess && { points: (currentUser.points || 0) + 1 }),
+      };
+
+      const docRef = doc(db, "users", currentUser.id);
+      await updateDoc(docRef, updatedData);
+
+      set({
+        currentUser: {
+          ...currentUser,
+          ...updatedData,
+        },
+      });
+    } catch (error) {
+      console.error("Error handling guess:", error);
+      toast.error("Something went wrong. Please try again.");
+    }
+  },
 
   decrementHints: async () => {
     try {
