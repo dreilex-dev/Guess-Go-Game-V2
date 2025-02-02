@@ -104,7 +104,10 @@ const Login = () => {
       if (!gameLobbySnap.exists()) {
         toast.error("Invalid game code. Please try again.");
         setLoadingJoin(false);
-        window.location.reload();
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
         return;
       }
 

@@ -9,12 +9,7 @@ import { useChatStore } from "./lib/chatStore";
 import AddUser from "./componenets/list/chatList/addUser/AddUser";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "./lib/firebase";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import GameLobby from "./componenets/GameLobby";
 import React from "react";
 import Home from "./componenets/home/Home";
