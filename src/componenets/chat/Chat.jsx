@@ -125,10 +125,7 @@ const Chat = () => {
     return null;
   };
 
-
-
   return (
-  
     <div className="chat">
       <div className="top">
         <div className="userChatSection">
@@ -193,9 +190,17 @@ const Chat = () => {
             alt=""
             onClick={() => setOpen((prev) => !prev)}
           />
-          <div className="picker">
-            <EmojiPicker open={open} onEmojiClick={handleEmoji} />
-          </div>
+          {open && (
+            <div className="picker-overlay">
+              <div className="picker">
+                <EmojiPicker
+                  open={open}
+                  onEmojiClick={handleEmoji}
+                  skinTonesDisabled
+                />
+              </div>
+            </div>
+          )}
         </div>
         <button className="sendButton" onClick={handleSend}>
           Send

@@ -78,7 +78,9 @@ const Lobby = () => {
     return () => window.removeEventListener("showRealNames", handleTimeUp);
   }, []);
 
-  const handleChatClick = () => navigate("/chat_room");
+  const handleChatClick = () => {
+    window.location.hash = "#/chat_room";
+  };
 
   // calculate ranks
   const playersWithRanks = isTimeUp

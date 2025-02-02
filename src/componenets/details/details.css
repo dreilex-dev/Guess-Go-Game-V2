@@ -59,6 +59,8 @@
     color: black;
   }
   .userDetailSection {
+    position: relative;
+    z-index: 1;
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
@@ -181,46 +183,45 @@
     }
 
     .btn-primary {
-      background: linear-gradient(45deg,  #f25c57, #004D74); 
+      background: linear-gradient(45deg, #f25c57, #004d74);
       box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
       color: white;
 
-
       &:hover {
-        background: linear-gradient(45deg,  #9df257, #004D74); 
+        background: linear-gradient(45deg, #9df257, #004d74);
         box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
-        }
       }
+    }
 
     .btn-secondary {
-      background: linear-gradient(45deg,  #57DFF2, #004D74); 
+      background: linear-gradient(45deg, #57dff2, #004d74);
       background-color: #1b9aaa;
       color: white;
 
       &:hover {
-        background: linear-gradient(45deg, #38cacf, #ffffff); 
-        color: #00647A;
+        background: linear-gradient(45deg, #38cacf, #ffffff);
+        color: #00647a;
       }
     }
 
     .btn-tertiary {
-      background-color: #F8FFE5; 
-      color: rgb(90, 89, 89);;
-    
+      background-color: #f8ffe5;
+      color: rgb(90, 89, 89);
+
       &:hover {
-        background-color: #edebeb; 
+        background-color: #edebeb;
       }
     }
 
     .logOutBtn {
       text-transform: uppercase;
-      background: linear-gradient(45deg, #ffffff, #9ae7f8); 
-      color: #00647A;
+      background: linear-gradient(45deg, #ffffff, #9ae7f8);
+      color: #00647a;
       box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
 
       &:hover {
-        color: #00647A;
-        background: linear-gradient(45deg, #ffffff, #fffff3); 
+        color: #00647a;
+        background: linear-gradient(45deg, #ffffff, #fffff3);
       }
     }
   }
@@ -234,7 +235,7 @@
     width: 200px;
     height: 38px;
     font-weight: 600;
-    color: #00647A;
+    color: #00647a;
     background-color: #ffffff; /* Blue-500 */
     border: none;
     border-radius: 5px;

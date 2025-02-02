@@ -16,7 +16,6 @@
     align-items: center;
     gap: 20px;
     padding: 20px;
-    
 
     .searchBar {
       flex: 1;
@@ -42,9 +41,9 @@
     }
 
     .add {
-      width: 40px;
-      height: 40px;
-      background-color: rgba(188, 207, 223, 0.5);
+      width: 45px;
+      height: 45px;
+
       padding: 10px;
       border-radius: 10px;
       cursor: pointer;
@@ -86,6 +85,5 @@
     cursor: pointer;
     width: 30px;
     height: 30px;
-    
   }
 }

@@ -84,7 +84,7 @@ const App = () => {
 
   useEffect(() => {
     if (currentUser && gameState === "ready") {
-      if (window.location.pathname !== "#/chat_room") {
+      if (window.location.hash !== "#/chat_room") {
         navigate("/");
       }
     }
