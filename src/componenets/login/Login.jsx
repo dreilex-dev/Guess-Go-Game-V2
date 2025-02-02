@@ -33,35 +33,50 @@ const Login = () => {
   const [hintNo2Create, setHintNo2Create] = useState("");
   const [loadingCreate, setLoadingCreate] = useState(false);
 
-  const [usedAvatars, setUsedAvatars] = useState([]);
   const resetUser = useUserStore((state) => state.resetUser);
   const { setGameState } = useUserStore();
 
-  const getRandomAvatar = () => {
-    const availableAvatars = avatars.filter(
-      (avatar) => !usedAvatars.includes(avatar)
-    );
-    if (availableAvatars.length === 0) {
-      alert("No avatars available! Please reset the game.");
+  const getRandomAvatar = async (gameCode) => {
+    try {
+      const usersQuery = query(
+        collection(db, "users"),
+        where("game_code", "==", gameCode)
+      );
+      const userSnap = await getDocs(usersQuery);
+
+      const usedAvatarsInGame = userSnap.docs.map((doc) => doc.data().avatar);
+
+      const availableAvatars = avatars.filter(
+        (avatar) => !usedAvatarsInGame.includes(avatar)
+      );
+
+      if (availableAvatars.length === 0) {
+        toast.warn("All avatars are used. Reassigning from existing avatars.");
+        return avatars[Math.floor(Math.random() * avatars.length)];
+      }
+
+      return availableAvatars[
+        Math.floor(Math.random() * availableAvatars.length)
+      ];
+    } catch (error) {
+      console.error("Error fetching used avatars:", error);
+      toast.error("Failed to fetch available avatars.");
       return null;
     }
-    const randomAvatar =
-      availableAvatars[Math.floor(Math.random() * availableAvatars.length)];
-    return randomAvatar;
   };
 
   const handleAvatarJoin = () => {
-    const selectedAvatar = getRandomAvatar();
+    console.log(avatars);
+    const selectedAvatar = avatars[Math.floor(Math.random() * avatars.length)];
     if (selectedAvatar) {
       setAvatarJoin(selectedAvatar);
-      setUsedAvatars([...usedAvatars, selectedAvatar]);
     }
   };
+
   const handleAvatarCreate = () => {
-    const selectedAvatar = getRandomAvatar();
+    const selectedAvatar = avatars[Math.floor(Math.random() * avatars.length)];
     if (selectedAvatar) {
       setAvatarCreate(selectedAvatar);
-      setUsedAvatars([...usedAvatars, selectedAvatar]);
     }
   };
 
@@ -92,6 +107,13 @@ const Login = () => {
         window.location.reload();
         return;
       }
+
+      const selectedAvatar = await getRandomAvatar(game_code);
+      if (!selectedAvatar) {
+        toast.error("Failed to assign a unique avatar.");
+        return;
+      }
+      setAvatarJoin(selectedAvatar);
 
       const userQuery = query(
         collection(db, "users"),
@@ -172,7 +194,7 @@ const Login = () => {
           game_code,
           hint_no1: hintId1,
           hint_no2: hintId2,
-          avatar: avatarJoin,
+          avatar: selectedAvatar,
           no_of_hints: 3,
           points: 0,
           is_playing: "",
@@ -196,7 +218,7 @@ const Login = () => {
             game_code,
             hint_no1: hintId1,
             hint_no2: hintId2,
-            avatar: avatarJoin,
+            avatar: selectedAvatar,
             no_of_hints: 3,
             points: 0,
             is_playing: "",
@@ -325,8 +347,8 @@ const Login = () => {
   };
 
   useEffect(() => {
-    handleAvatarJoin();
     handleAvatarCreate();
+    handleAvatarJoin();
   }, []);
 
   return (
